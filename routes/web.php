@@ -8,6 +8,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\MotivationController;
 use App\Http\Controllers\PrestationController;
 use App\Http\Controllers\ReservationController;
+use App\Models\Motivation;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,8 @@ Route::get('reboot',function(){
 Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::get('/home', function () {
-    return view('dashboard');
+    $motivation = Motivation::orderBy('id', 'desc')->first();
+    return view('dashboard', compact('motivation'));
 })->middleware(['auth', 'verified'])->name('home');
 
 Route::resource('prestation', PrestationController::class);

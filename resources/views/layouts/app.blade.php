@@ -48,7 +48,7 @@
         @include('layouts.navigation')
 
         <!-- Page Content -->
-        <main class="pb-16"> {{ $slot }} </main>
+        <main class="pb-20"> {{ $slot }} </main>
 
         <footer class="w-full h-max">
             @include('layouts.bottom-bar')

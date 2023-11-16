@@ -72,7 +72,7 @@
                         <div>
                             <a class="flex items-center no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
                                 href="/">
-                                <img class="w-20" src="{{ asset('img/logo.jpg') }}" alt="traiteur_local">
+                                <img class="w-20" src="{{ asset('img/logo.jpg') }}" alt="motemaxx">
                                 {{-- <div class="logo-ext tracking-widest text-sm md:text-2xl font-semibold italic rounded text-white">Au pré des saveurs</div> --}}
                             </a>
                         </div>
@@ -192,7 +192,7 @@
 
     <div class="container max-w-screen-xl mx-auto px-4">
         <header class="flex flex-col lg:flex-row justify-between lg:mb-20">
-            <div class="flex flex-col justify-around lg:text-left mb-20 lg:mb-0 md:w-1/2">
+            <div class="flex flex-col justify-around text-center md:text-left mb-20 md:mb-0 mt-10 md:mt-0 md:w-1/2">
 
                 <h1 class="font-bold text-gray-800 text-xl md:text-2xl xl:text-4xl mb-10">
                     Indulgez dans la Beauté <br> Allumez la Confiance <br> Libérez votre Éclat chez Motemaxx
@@ -445,7 +445,7 @@
                 <a class="text-white no-underline hover:no-underline" href="#">&copy; Motemaxx
                     2023</a>
                 {{-- @if (Route::has('login.admin')) --}}
-                <a class="text-white no-underline hover:no-underline" href="{{ route('app') }}">&copy;
+                <a class="text-white no-underline hover:no-underline" href="{{ route('home') }}">&copy;
                     Administration</a>
                 {{-- @endif --}}
             </div>

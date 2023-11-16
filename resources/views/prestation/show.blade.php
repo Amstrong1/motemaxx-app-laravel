@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="overflow-hidden sm:rounded-lg">
-            <div class="p-6 text-black text-center font-bold">
+            <div class="p-6 text-black text-center font-bold uppercase">
                 {{ $prestation->name }}
             </div>
 
@@ -25,7 +25,7 @@
             <div class="p-4 uppercase text-center">
                 <a href="{{ route('reservation.create') }}">
                     <x-primary-button>
-                        Réserver
+                        <span class="px-6 py-3">Réserver</span>
                     </x-primary-button>
                 </a>
             </div>

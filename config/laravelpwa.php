@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => env('APP_NAME'),
     'manifest' => [
-        'name' => env('APP_NAME', 'My PWA App'),
-        'short_name' => 'PWA',
-        'start_url' => '/',
+        'name' => env('APP_NAME'),
+        'short_name' => env('APP_NAME'),
+        'start_url' => '/home',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
         'display' => 'standalone',
@@ -59,19 +59,19 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'Shortcut Link 1',
-                'description' => 'Shortcut Link 1 Description',
-                'url' => '/shortcutlink1',
+                'name' => 'home',
+                'description' => 'Access home page',
+                'url' => '/home',
                 'icons' => [
                     "src" => "/images/icons/icon-72x72.png",
                     "purpose" => "any"
                 ]
             ],
-            [
-                'name' => 'Shortcut Link 2',
-                'description' => 'Shortcut Link 2 Description',
-                'url' => '/shortcutlink2'
-            ]
+            // [
+            //     'name' => 'Shortcut Link 2',
+            //     'description' => 'Shortcut Link 2 Description',
+            //     'url' => '/shortcutlink2'
+            // ]
         ],
         'custom' => []
     ]

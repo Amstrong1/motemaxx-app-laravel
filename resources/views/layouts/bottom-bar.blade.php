@@ -1,4 +1,4 @@
-<section id="bottom-navigation" class="block fixed inset-x-0 bottom-0 z-10 shadow"
+<section id="bottom-navigation" class="py-4 block fixed inset-x-0 bottom-0 z-10 shadow"
     style="background-color: rgba(63, 38, 57, 1)">
     <div id="tabs" class="flex justify-between">
         <a @if (auth()->user() !== null)
@@ -13,7 +13,7 @@
                     d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
             </svg>
 
-            <span class="tab tab-home block text-xs">Acceuil</span>
+            <span class="tab tab-home block text-sm">Acceuil</span>
         </a>
         <a href="{{ route('reservation.index') }}" class="w-full text-white justify-center inline-block text-center pt-2 pb-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 block mx-auto">
@@ -25,7 +25,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <span class="tab tab-kategori block text-xs">Reservation</span>
+            <span class="tab tab-kategori block text-sm">Reservation</span>
         </a>
         <a href="{{ route('profile.edit') }}" class="w-full text-white justify-center inline-block text-center pt-2 pb-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 block mx-auto">
@@ -34,7 +34,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <span class="tab tab-explore block text-xs">Profil</span>
+            <span class="tab tab-explore block text-sm">Profil</span>
         </a>
     </div>
 </section>

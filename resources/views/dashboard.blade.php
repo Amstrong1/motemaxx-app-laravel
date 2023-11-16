@@ -6,7 +6,12 @@
             </div>
 
             <div class="mx-4">
-                <img class="shadow-lg rounded block m-auto" src="{{ asset('img/motivation.jpg') }}" alt="">
+                @if ($motivation !== null)
+                    <img class="shadow-lg rounded block m-auto" src="{{ asset('storage/' . $motivation->image) }}"
+                        alt="">
+                @else
+                    <img class="shadow-lg rounded block m-auto" src="{{ asset('img/motivation.jpg') }}" alt="">
+                @endif
             </div>
 
             <div class="grid grid-cols-2 border border-blue-700 rounded py-4 m-4">
