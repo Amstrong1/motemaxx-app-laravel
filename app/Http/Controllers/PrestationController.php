@@ -80,7 +80,7 @@ class PrestationController extends Controller
         session(['prestation_id' => $prestation->id]);
         $images = ImagePrestation::where('prestation_id', $prestation->id)->get();
 
-        if (Auth::user()->admin == false) {
+        if (Auth::user() == null ||  Auth::user()->admin == false) {
             return view('prestation.show', compact('prestation', 'images'));
         } else {
             return view('admin.prestation.show', [

@@ -75,9 +75,9 @@ class ReservationController extends Controller
         }
 
         $admins = User::where('admin', true)->get();
-        foreach ($admins as $admin) {
-            $admin->notify(new NewReservation());
-        }
+        // foreach ($admins as $admin) {
+        //     $admin->notify(new NewReservation());
+        // }
 
         if ($reservation->save()) {
             Alert::toast("Réservation éffectué", 'success');

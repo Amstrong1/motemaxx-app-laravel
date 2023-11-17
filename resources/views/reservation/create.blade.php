@@ -5,7 +5,7 @@
                 @csrf
                 <div class="p-6">
                     @if (session('prestation_id') !== null)
-                        <div class="relative my-4">
+                        <div class="multiselect relative my-4">
                             <select name="prestation_id" data-te-select-init>
                                 @foreach ($prestations as $prestation)
                                     @if (session('prestation_id') == $prestation->id)
@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    <div class="relative my-4">
+                    <div class="multiselect relative my-4">
                         <select name="prestations[]" data-te-select-init multiple>
                             @foreach ($prestations as $prestation)
                                 @if (session('prestation_id') !== $prestation->id)
@@ -105,4 +105,10 @@
         filter: filterFunction,
         disablePast: true
     });
+
+    // var multiselectDiv = document.getElementsByClassName('multiselect');
+
+    // for (let i = 0; i < multiselectDiv.length; i++) {
+    //     multiselectDiv[i].classList.add('w-full');        
+    // }
 </script>

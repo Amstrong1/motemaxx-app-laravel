@@ -12,6 +12,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\ResConsultationController;
+use App\Http\Controllers\UserConsultationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +54,12 @@ Route::resource('prestation', PrestationController::class);
 Route::resource('motivation', MotivationController::class);
 Route::resource('recommendation', RecommendationController::class);
 
+
 Route::middleware('auth')->group(function () {
     Route::resource('reservation', ReservationController::class);
     Route::resource('consultation', ConsultationController::class);
     Route::resource('res_consultation', ResConsultationController::class);
+    Route::resource('user_consultation', UserConsultationController::class);
 
     Route::get('admin/dashboard', AdminController::class)->name('admin.dashboard');
 
