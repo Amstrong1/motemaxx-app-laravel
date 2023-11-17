@@ -31,24 +31,34 @@ class UserConsultationController extends Controller
      */
     public function store(StoreUserConsultationRequest $request)
     {
-        // dd($request->except('_token'));
-
-        for ($i=0; $i < count($request->except('_token')); $i++) {
-            $userConsultation = new UserConsultation();
-            $userConsultation->user_id = Auth::user()->id;
-            $userConsultation->consultation_id = $request->input('consultation_id')[$i];
-            $userConsultation->answer = $request->input('answer')[$i][0];
-            if (isset($request->input('description')[$i])) {
-                $userConsultation->description = $request->input('description')[$i];
+        $error = 0;
+        for ($i = 0; $i < count($request->input('answer')); $i++) {
+            if ($request->input('answer')[$i][0] == null) {
+                $error++;
             }
-            $userConsultation->save();
         }
 
-        if ($userConsultation->save()) {
-            Alert::toast("Vos réposes ont été pris en compte", 'success');
-            return redirect('consultation');
+        if ($error == 0) {
+            for ($i = 0; $i < count($request->input('consultation_id')); $i++) {
+                $userConsultation = new UserConsultation();
+                $userConsultation->user_id = Auth::user()->id;
+                $userConsultation->consultation_id = $request->input('consultation_id')[$i];
+                $userConsultation->answer = $request->input('answer')[$i][0];
+                if (isset($request->input('description')[$i])) {
+                    $userConsultation->description = $request->input('description')[$i];
+                }
+                $userConsultation->save();
+            }
+
+            if ($userConsultation->save()) {
+                Alert::toast("Vos réponses ont été pris en compte", 'success');
+                return redirect('consultation');
+            } else {
+                Alert::toast('Une erreur est survenue', 'error');
+                return redirect()->back()->withInput($request->input());
+            }
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast('Veuillez remplir tous les champs', 'error');
             return redirect()->back()->withInput($request->input());
         }
     }

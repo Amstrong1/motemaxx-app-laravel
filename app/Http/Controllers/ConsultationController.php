@@ -82,7 +82,6 @@ class ConsultationController extends Controller
     {
         $resConsultations = ResConsultation::where('consultation_id', $consultation->id)->get();
         session(['answerCount' => $consultation->answer]);
-        // dd(session('answerCount'));
         return view('admin.consultation.edit', [
             'consultation' => $consultation,
             'resConsultations' => $resConsultations,

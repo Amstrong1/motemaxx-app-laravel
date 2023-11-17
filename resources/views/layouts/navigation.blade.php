@@ -1,10 +1,10 @@
 <nav x-data="{ open: false }" class="border-b border-gray-100" style="background-color: rgba(63, 38, 57, 1)">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-20">
             <div class="flex items-center">
                 @if (!request()->routeIs('home'))
-                    <a href="{{ url()->previous() }}" class="text-white px-2">
+                    <a href="{{ url()->previous() }}" class="text-white px-2 font-bold">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -15,19 +15,23 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block sm:h-10 h-9 fill-current text-gray-800" />
+                        <x-application-logo class="block sm:h-12 h-9 fill-current text-gray-800" />
                     </a>
                 </div>
             </div>
 
             <!-- Notification -->
             <div class="-me-2 flex items-center">
-                <button class="inline-flex items-center justify-center p-2 rounded-md text-white">
+                <button class="inline-flex items-center justify-center mx-2 p-2 rounded-md text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                     </svg>
+                    <div
+                        class="absolute bottom-auto left-auto right-15 top-5 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-neutral-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
+                        0
+                    </div>
                 </button>
 
                 <a href="{{ route('profile.edit') }}">
