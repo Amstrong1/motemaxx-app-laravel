@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Motivation;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AdminController;
@@ -8,7 +9,9 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\MotivationController;
 use App\Http\Controllers\PrestationController;
 use App\Http\Controllers\ReservationController;
-use App\Models\Motivation;
+use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\ResConsultationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +51,12 @@ Route::get('/home', function () {
 Route::resource('prestation', PrestationController::class);
 
 Route::resource('motivation', MotivationController::class);
+Route::resource('recommendation', RecommendationController::class);
 
 Route::middleware('auth')->group(function () {
     Route::resource('reservation', ReservationController::class);
+    Route::resource('consultation', ConsultationController::class);
+    Route::resource('res_consultation', ResConsultationController::class);
 
     Route::get('admin/dashboard', AdminController::class)->name('admin.dashboard');
 

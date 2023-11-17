@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Prestation;
 use App\Models\Reservation;
+use App\Models\HourReservation;
+use App\Models\ReservationService;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NewReservation;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
-use App\Notifications\NewReservation;
 
 class ReservationController extends Controller
 {
@@ -20,6 +22,7 @@ class ReservationController extends Controller
     {
         $reservations = Reservation::where('user_id', Auth::user()->id)->get();
         if (Auth::user()->admin == false) {
+            session(['prestation_id' => null]);
             return view('reservation.index', compact('reservations'));
         } else {
             return view('admin.reservation.index', [
@@ -27,7 +30,7 @@ class ReservationController extends Controller
                 'my_actions' => $this->reservation_actions(),
                 'my_attributes' => $this->reservation_columns()
             ]);
-        }        
+        }
     }
 
     /**
@@ -44,13 +47,32 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request)
     {
+        // dd($request->input('hours')[1]);
         $reservation = new Reservation();
         $reservation->user_id = Auth::user()->id;
         $reservation->date = date("Y-m-d", strtotime($request->input('date')));
-        $reservation->time_start = $request->input('time_start');
-        $reservation->time_end = $request->input('time_end');
-        $reservation->prestation_id = $request->input('prestation_id');
         $reservation->save();
+
+        for ($i = 1; $i < count($request->input('hours')); $i++) {
+            $hourReservation = new HourReservation();
+            $hourReservation->reservation_id = $reservation->id;
+            $hourReservation->hour = $request->input('hours')[$i];
+            $hourReservation->save();
+        }
+
+        $reservationService = new ReservationService();
+        $reservationService->reservation_id = $reservation->id;
+        $reservationService->prestation_id = $request->input('prestation_id');
+        $reservationService->save();
+
+        if ($request->input('prestations') == null) {
+            for ($i = 1; $i < count($request->input('prestations')); $i++) {
+                $reservationService = new ReservationService();
+                $reservationService->reservation_id = $reservation->id;
+                $reservationService->prestation_id = $request->input('prestations')[$i];
+                $reservationService->save();
+            }
+        }
 
         $admins = User::where('admin', true)->get();
         foreach ($admins as $admin) {

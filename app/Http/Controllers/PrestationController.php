@@ -17,7 +17,7 @@ class PrestationController extends Controller
     public function index()
     {
         $prestations = Prestation::all();
-        if (Auth::user()->admin == false) {
+        if (Auth::user() == null ||  Auth::user()->admin == false) {
             return view('prestation.index', [
                 'prestations' => $prestations,
             ]);
@@ -77,6 +77,7 @@ class PrestationController extends Controller
      */
     public function show(Prestation $prestation)
     {
+        session(['prestation_id' => $prestation->id]);
         $images = ImagePrestation::where('prestation_id', $prestation->id)->get();
 
         if (Auth::user()->admin == false) {

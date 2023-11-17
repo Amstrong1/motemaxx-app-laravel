@@ -49,6 +49,36 @@
                                 {{ $services }}
                             </div>
                         </div>
+                        <div class="rounded shadow-lg m-4 p-4 flex justify-between items-center">
+                            <div>
+                                <div class="text-xl font-bold p-4">
+                                    Recommandations
+                                </div>
+                                <div>
+                                    <a href="{{ route('recommendation.index') }}" class="block p-4">
+                                        Voir la liste
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="text-xl font-bold p-4">
+                                {{ $recommendations }}
+                            </div>
+                        </div>
+                        <div class="rounded shadow-lg m-4 p-4 flex justify-between items-center">
+                            <div>
+                                <div class="text-xl font-bold p-4">
+                                    Consultations
+                                </div>
+                                <div>
+                                    <a href="{{ route('consultation.index') }}" class="block p-4">
+                                        Voir la liste
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="text-xl font-bold p-4">
+                                {{ $consultations }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

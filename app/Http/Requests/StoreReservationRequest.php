@@ -24,8 +24,7 @@ class StoreReservationRequest extends FormRequest
         return [
             'prestation_id' => 'required',
             'date' => 'required',
-            'time_start' => 'required', 
-            'time_end' => 'required',
+            // 'hours[]' => 'required', 
         ];
     }
 }

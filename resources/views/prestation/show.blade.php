@@ -6,7 +6,7 @@
             </div>
 
             <div class="flex py-4">
-                <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-24">
+                <div class="container mx-auto px-2 py-2 lg:px-32 lg:pt-24">
                     <div class="-m-1 flex flex-wrap md:-m-2">
                         @foreach ($images as $image)
                             <div class="w-1/2 p-1 md:p-2">
@@ -25,7 +25,7 @@
             <div class="p-4 uppercase text-center">
                 <a href="{{ route('reservation.create') }}">
                     <x-primary-button>
-                        <span class="px-6 py-3">Réserver</span>
+                        <span class="px-4 py-3">Prenez un rendez-vous</span>
                     </x-primary-button>
                 </a>
             </div>

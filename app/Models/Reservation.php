@@ -16,9 +16,14 @@ class Reservation extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function prestation()
+    public function reservationServices()
     {
-        return $this->belongsTo(Prestation::class); 
+        return $this->hasMany(ReservationService::class); 
+    }
+
+    public function hourReservations()
+    {
+        return $this->hasMany(HourReservation::class); 
     }
 
     public function getFormattedDateAttribute(){

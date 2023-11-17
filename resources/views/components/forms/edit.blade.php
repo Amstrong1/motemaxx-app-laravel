@@ -1,5 +1,5 @@
 <!-- Happiness is not something readymade. It comes from your own actions. - Dalai Lama -->
-<form method="POST" action="{{ route(Str::plural($type) . '.update', [$item]) }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route($type . '.update', [$item]) }}" enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <!-- inputs -->
