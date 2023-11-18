@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Motivation;
-use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreMotivationRequest;
 use App\Http\Requests\UpdateMotivationRequest;
@@ -40,18 +39,21 @@ class MotivationController extends Controller
     {
         $motivation = new Motivation();
 
-        $fileName = time() . '.' . $request->logo->extension();
-        $request->logo->move(public_path('storage'), $fileName);
-
-        $motivation = new Motivation();
+        $fileName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('storage'), $fileName);
 
         $motivation->text = $request->text;
         $motivation->publication_date = $request->publication_date;
         $motivation->image = $fileName;
-        $motivation->status = 'Non Envoyer';
-        $motivation->save();
+        $motivation->status = 'Non Envoyer';        
 
-        return redirect()->route('motivation.index');
+        if ($motivation->save()) {
+            Alert::toast('Données enregistrées', 'success');
+            return redirect('motivation');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -90,6 +92,14 @@ class MotivationController extends Controller
 
         if (isset($fileName)) {
             $motivation->image = $fileName;
+        }
+
+        if ($motivation->save()) {
+            Alert::toast('Données enregistrées', 'success');
+            return redirect('motivation');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
         }
     }
 

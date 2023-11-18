@@ -67,7 +67,7 @@
                         <div class="rounded shadow-lg m-4 p-4 flex justify-between items-center">
                             <div>
                                 <div class="text-xl font-bold p-4">
-                                    Consultations
+                                    Consultations Questions
                                 </div>
                                 <div>
                                     <a href="{{ route('consultation.index') }}" class="block p-4">
@@ -77,6 +77,21 @@
                             </div>
                             <div class="text-xl font-bold p-4">
                                 {{ $consultations }}
+                            </div>
+                        </div>
+                        <div class="rounded shadow-lg m-4 p-4 flex justify-between items-center">
+                            <div>
+                                <div class="text-xl font-bold p-4">
+                                    Consultations Réponses
+                                </div>
+                                <div>
+                                    <a href="{{ route('user_consultation.index') }}" class="block p-4">
+                                        Voir la liste
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="text-xl font-bold p-4">
+                                {{ $userConsultations }}
                             </div>
                         </div>
                     </div>

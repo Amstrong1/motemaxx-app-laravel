@@ -7,8 +7,17 @@
 
             <div class="mx-4">
                 @if ($motivation !== null)
-                    <img class="shadow-lg rounded block m-auto" src="{{ asset('storage/' . $motivation->image) }}"
-                        alt="">
+                    @if ($motivation->image !== null)
+                        <img class="shadow-lg rounded block m-auto" src="{{ asset('storage/' . $motivation->image) }}"
+                            alt="">
+                    @else
+                        @if ($motivation->text !== null)
+                            {!! $motivation->text !!}
+                        @else
+                            <img class="shadow-lg rounded block m-auto" src="{{ asset('img/motivation.jpg') }}"
+                                alt="">
+                        @endif
+                    @endif
                 @else
                     <img class="shadow-lg rounded block m-auto" src="{{ asset('img/motivation.jpg') }}" alt="">
                 @endif
@@ -28,7 +37,7 @@
                         </p>
                     </div>
                 </a>
-                <a href="">
+                <a href="{{ route('recommendation.index') }}">
                     <div class="text-center border-l border-blue-700 text-sm font-bold">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-5 h-5 block m-auto">

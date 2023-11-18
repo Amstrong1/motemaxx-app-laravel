@@ -56,6 +56,7 @@ Route::resource('recommendation', RecommendationController::class);
 
 
 Route::middleware('auth')->group(function () {
+    Route::match(['get', 'post'], 'reservation/paid/{id}', [ReservationController::class, 'paid'])->name('reservation.paid');
     Route::resource('reservation', ReservationController::class);
     Route::resource('consultation', ConsultationController::class);
     Route::resource('res_consultation', ResConsultationController::class);

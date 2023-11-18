@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recommendation;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreRecommendationRequest;
 use App\Http\Requests\UpdateRecommendationRequest;
 
@@ -13,7 +15,19 @@ class RecommendationController extends Controller
      */
     public function index()
     {
-        //
+        $recommendations = Recommendation::all();
+
+        if (Auth::user()->admin == false) {
+            return view('recommandation.index', [
+                'recommendations' => $recommendations,
+            ]);
+        } else {
+            return view('admin.recommandation.index', [
+                'recommendations' => $recommendations,
+                'my_actions' => $this->recommendation_actions(),
+                'my_attributes' => $this->recommendation_columns()
+            ]);
+        }
     }
 
     /**
@@ -21,7 +35,9 @@ class RecommendationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.recommandation.create', [
+            'my_fields' => $this->recommendation_fields()
+        ]);
     }
 
     /**
@@ -29,7 +45,18 @@ class RecommendationController extends Controller
      */
     public function store(StoreRecommendationRequest $request)
     {
-        //
+        $recommendation = new Recommendation();
+
+        $recommendation->title = $request->title;
+        $recommendation->description = $request->description;
+
+        if ($recommendation->save()) {
+            Alert::toast('Données enregistrées', 'success');
+            return redirect('recommendation');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -45,7 +72,10 @@ class RecommendationController extends Controller
      */
     public function edit(Recommendation $recommendation)
     {
-        //
+        return view('admin.recommandation.edit', [
+            'recommendation' => $recommendation,
+            'my_fields' => $this->recommendation_fields(),
+        ]);
     }
 
     /**
@@ -53,7 +83,18 @@ class RecommendationController extends Controller
      */
     public function update(UpdateRecommendationRequest $request, Recommendation $recommendation)
     {
-        //
+        $recommendation = Recommendation::find($recommendation->id);
+
+        $recommendation->title = $request->title;
+        $recommendation->description = $request->description;
+
+        if ($recommendation->save()) {
+            Alert::toast('Données enregistrées', 'success');
+            return redirect('recommendation');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -61,6 +102,47 @@ class RecommendationController extends Controller
      */
     public function destroy(Recommendation $recommendation)
     {
-        //
+        try {
+            $recommendation = $recommendation->delete();
+            Alert::success('Opération effectuée', 'Suppression éffectué');
+            return redirect('recommendation');
+        } catch (\Exception $e) {
+            Alert::error('Erreur', 'Element introuvable');
+            return redirect()->back();
+        }
+    }
+
+    private function recommendation_columns()
+    {
+        $columns = (object) array(
+            'title' => 'Titre',
+            'description' => "Description",
+        );
+        return $columns;
+    }
+
+    private function recommendation_actions()
+    {
+        $actions = (object) array(
+            'show' => 'Voir',
+            'edit' => 'Modifier',
+            'delete' => "Supprimer",
+        );
+        return $actions;
+    }
+
+    private function recommendation_fields()
+    {
+        $fields = [
+            'title' => [
+                'title' => 'Titre',
+                'field' => 'text'
+            ],
+            'description' => [
+                'title' => 'Description',
+                'field' => 'textarea'
+            ]
+        ];
+        return $fields;
     }
 }

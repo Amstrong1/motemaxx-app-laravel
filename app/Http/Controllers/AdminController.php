@@ -7,6 +7,7 @@ use App\Models\Prestation;
 use App\Models\Reservation;
 use App\Models\Consultation;
 use App\Models\Recommendation;
+use App\Models\UserConsultation;
 
 class AdminController extends Controller
 {
@@ -17,6 +18,7 @@ class AdminController extends Controller
         $reservations = Reservation::count();
         $consultations = Consultation::count();
         $recommendations = Recommendation::count();
+        $userConsultations = UserConsultation::count();
 
         return view('admin.index', compact(
             'services',
@@ -24,6 +26,7 @@ class AdminController extends Controller
             'reservations',
             'consultations',
             'recommendations',
+            'userConsultations',
         ));
     }
 }

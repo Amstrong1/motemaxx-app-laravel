@@ -133,7 +133,7 @@ return [
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
     'required_with_all' => 'The :attribute field is required when :values are present.',
-    'required_without' => 'Ce champ est requis lorsque :values ​​n\'est pas présent.',
+    'required_without' => 'Ce champ est requis lorsque :values n\'est pas présent.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
     'same' => 'The :attribute field must match :other.',
     'size' => [

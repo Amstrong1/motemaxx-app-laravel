@@ -67,9 +67,13 @@ class PrestationController extends Controller
                     'image' => $fileName,
                 ]);
             }
-        }
 
-        return redirect()->route('prestation.index');
+            Alert::toast('Données enregistrées', 'success');
+            return redirect('motivation');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -128,16 +132,14 @@ class PrestationController extends Controller
                 foreach ($request->file('images') as $image) {
                     $file = time() . '.' . $image->extension() . '.' . $i++;
                     $image->move(public_path('storage'), $file);
-    
+
                     ImagePrestation::create([
                         'prestation_id' => $prestation->id,
                         'image' => $fileName,
                     ]);
                 }
             }
-        }
 
-        if ($prestation->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
             return redirect('prestation');
         };

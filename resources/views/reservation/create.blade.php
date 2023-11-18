@@ -77,9 +77,9 @@
                     </div>
                     <x-input-error :messages="$errors->get('time_end')" class="mt-2" /> --}}
 
-                    <div class="text-center">
+                    <div class="">
                         <x-primary-button type="submit" class="w-full">
-                            <span class="p-2 text-center">Prenez un rendez-vous</span>
+                            <span class="p-2 block mx-auto">Prenez un rendez-vous</span>
                         </x-primary-button>
                     </div>
                 </div>
@@ -105,10 +105,4 @@
         filter: filterFunction,
         disablePast: true
     });
-
-    // var multiselectDiv = document.getElementsByClassName('multiselect');
-
-    // for (let i = 0; i < multiselectDiv.length; i++) {
-    //     multiselectDiv[i].classList.add('w-full');        
-    // }
 </script>

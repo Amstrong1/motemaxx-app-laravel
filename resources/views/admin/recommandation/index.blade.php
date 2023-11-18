@@ -5,14 +5,14 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">Liste des services</h1>
-                        <a href="{{ route('recommandation.create') }}">
+                        <a href="{{ route('recommendation.create') }}">
                             <x-primary-button>
                                 Nouveau
                             </x-primary-button>
                         </a>
                     </div>
                     <div class="mt-4">
-                        <x-tables.default :resources="$recommandations" :mattributes="$my_attributes" type="recommandation" :mactions="$my_actions" />
+                        <x-tables.default :resources="$recommendations" :mattributes="$my_attributes" type="recommendation" :mactions="$my_actions" />
                     </div>
                 </div>
             </div>

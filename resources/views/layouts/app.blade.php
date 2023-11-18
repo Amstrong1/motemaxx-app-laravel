@@ -24,7 +24,7 @@
     <script src="https://cdn.tailwindcss.com/3.3.0"></script>
     <script>
         tailwind.config = {
-            darkMode: "media",
+            darkMode: "class",
             theme: {
                 fontFamily: {
                     sans: ["Philosopher", "serif"],

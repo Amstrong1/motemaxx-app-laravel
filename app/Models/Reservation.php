@@ -9,7 +9,7 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    protected $append = ['user_name', 'formatted_date', 'prestation_name'];
+    protected $append = ['user_name', 'formatted_date', 'prestation_name', 'hour'];
 
     public function user()
     {
@@ -35,7 +35,21 @@ class Reservation extends Model
     }
 
     public function getPrestationNameAttribute(){
-        return $this->prestation->name;
+        $servicesName = [];
+        $getServices = $this->reservationServices()->get();
+        foreach ($getServices as $getService) {
+            $servicesName[] = $getService->prestation->name;
+        }
+        return $servicesName;
+    }
+
+    public function getHourAttribute(){
+        $hours = [];
+        $getHours = $this->hourReservations()->get();
+        foreach ($getHours as $getHour) {
+            $hours[] = $getHour->hour;
+        }
+        return $hours;
     }
 
 }
