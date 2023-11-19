@@ -4,6 +4,9 @@
 
     <!-- inputs -->
     <div @class(['form-group md:grid grid-cols-2 gap-2 mt-4'])>
+        @php
+            $i = 0;
+        @endphp
         @foreach ($fields as $attr => $value)
             <div @class(['m-2', 'col-span-2' => isset($value['colspan'])])>
                 @php
@@ -64,8 +67,7 @@
                         value="{!! $value['title'] !!}"></x-input-label>
 
                     <input type="file" name="{{ $attr }}[]" id="{{ $attr }}"
-                        class="block mt-1 w-full border-2 p-2 rounded outline-0"
-                        multiple>
+                        class="block mt-1 w-full border-2 p-2 rounded outline-0" multiple>
                     @error($attr)
                         <p class="text-red-500 text-sm pl-2 pt-2">
                             {{ $message }}
@@ -110,19 +112,25 @@
 
                     <x-dynamic-component :component="$component" id="{{ $attr }}"
                         class="block mt-1 w-full border-2 p-2 rounded outline-0" type="{{ $value['field'] }}"
-                        name="{{ $attr }}" value="{{ old($attr) }}" autocomplete="{{ $attr }}" />
+                        name="{{ $attr }}" value="{{ $fills[$i]->answer ?? old($attr) }}"
+                        autocomplete="{{ $attr }}" />
 
                     @error($attr)
                         <x-input-error messages="{{ $message }}" class="mt-2" />
                     @enderror
                 @endif
             </div>
+            @php
+                $i++;
+            @endphp
         @endforeach
     </div>
 
-    <div class="flex items-center justify-start mt-4">
-        <x-primary-button class="ml-4">
-            {{ __('Ajouter') }}
-        </x-primary-button>
-    </div>
+    @if (!isset($hideSubmitButton))
+        <div class="flex items-center justify-start mt-4">
+            <x-primary-button class="ml-4">
+                {{ __('Ajouter') }}
+            </x-primary-button>
+        </div>
+    @endif
 </form>

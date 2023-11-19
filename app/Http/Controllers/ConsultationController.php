@@ -72,7 +72,14 @@ class ConsultationController extends Controller
      */
     public function show(Consultation $consultation)
     {
-        //
+        $resConsultations = ResConsultation::where('consultation_id', $consultation->id)->get();
+        session(['answerCount' => $consultation->answer]);
+        return view('admin.consultation.show', [
+            'consultation' => $consultation,
+            'resConsultations' => $resConsultations,
+            'my_fields' => $this->consultation_fields(),
+            'my_resFields' => $this->resConsultation_fields(),
+        ]);
     }
 
     /**

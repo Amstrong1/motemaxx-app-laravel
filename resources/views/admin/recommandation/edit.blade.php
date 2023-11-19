@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h1>Modifier les informations de {{ $recommandation->name }}</h1>
-                    <x-forms.update :item="$recommandation" :fields="$my_fields" type="recommandation" />
+                    <x-forms.edit :item="$recommandation" :fields="$my_fields" type="recommandation" />
                 </div>
             </div>
         </div>

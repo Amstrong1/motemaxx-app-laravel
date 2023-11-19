@@ -55,24 +55,33 @@
                 <h2 class="pt-6 text-gray-900 uppercase text-center font-bold">{{ __('Publicités') }}</h2>
                 <!--Carousel items-->
                 <div class="relative rounded w-full overflow-hidden after:clear-both after:block after:content-['']">
-                    <!--First item-->
-                    <div class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-                        data-te-carousel-item data-te-carousel-active>
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="block w-full"
-                            alt="Wild Landscape" />
-                    </div>
-                    <!--Second item-->
-                    <div class="relative rounded float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-                        data-te-carousel-item>
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="block w-full"
-                            alt="Camera" />
-                    </div>
-                    <!--Third item-->
-                    <div class="relative rounded float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-                        data-te-carousel-item>
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="block w-full"
-                            alt="Exotic Fruits" />
-                    </div>
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach ($advertisements as $advertisement)
+                        @if ($i == 0)
+                            <a href="{{ $advertisement->link }}">
+                                <div class="relative rounded float-left -mr-[100%] w-full h-48 md:h-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                                    data-te-carousel-item data-te-carousel-active>
+                                    <img src="{{ asset('storage/' . $advertisement->image) }}"
+                                        class="block h-full w-full rounded-lg object-cover object-center"
+                                        alt="{{ $advertisement->title }}" />
+                                </div>
+                            </a>
+                        @else
+                            <a href="{{ $advertisement->link }}">
+                                <div class="relative rounded float-left -mr-[100%] hidden w-full h-48 md:h-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                                    data-te-carousel-item>
+                                    <img src="{{ asset('storage/' . $advertisement->image) }}"
+                                        class="block h-full w-full rounded-lg object-cover object-center"
+                                        alt="{{ $advertisement->title }}" />
+                                </div>
+                            </a>
+                        @endif
+                        @php
+                            $i++;
+                        @endphp
+                    @endforeach
                 </div>
 
                 <!--Carousel controls - prev item-->

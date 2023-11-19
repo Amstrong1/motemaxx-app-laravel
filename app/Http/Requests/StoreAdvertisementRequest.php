@@ -11,7 +11,7 @@ class StoreAdvertisementRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreAdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string',
+            'image' => 'required|image',
+            'link' => 'url|nullable',
+            'show' => 'required',
         ];
     }
 }

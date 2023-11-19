@@ -22,6 +22,21 @@
                         <div class="rounded shadow-lg m-4 p-4 flex justify-between items-center">
                             <div>
                                 <div class="text-xl font-bold p-4">
+                                    Publicités
+                                </div>
+                                <div>
+                                    <a href="{{ route('advertisement.index') }}" class="block p-4">
+                                        Voir la liste
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="text-xl font-bold p-4">
+                                {{ $advertisements }}
+                            </div>
+                        </div>
+                        <div class="rounded shadow-lg m-4 p-4 flex justify-between items-center">
+                            <div>
+                                <div class="text-xl font-bold p-4">
                                     Reservations
                                 </div>
                                 <div>
@@ -92,6 +107,21 @@
                             </div>
                             <div class="text-xl font-bold p-4">
                                 {{ $userConsultations }}
+                            </div>
+                        </div>
+                        <div class="rounded shadow-lg m-4 p-4 flex justify-between items-center">
+                            <div>
+                                <div class="text-xl font-bold p-4">
+                                    Utilisateurs Inscrits
+                                </div>
+                                <div>
+                                    <a href="{{ route('user.index') }}" class="block p-4">
+                                        Voir la liste
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="text-xl font-bold p-4">
+                                {{ $users }}
                             </div>
                         </div>
                     </div>

@@ -47,8 +47,10 @@ class RecommendationController extends Controller
     {
         $recommendation = new Recommendation();
 
-        $recommendation->title = $request->title;
-        $recommendation->description = $request->description;
+        $recommendation->day = $request->day;
+        $recommendation->breakfast = $request->breakfast;
+        $recommendation->lunch = $request->lunch;
+        $recommendation->dinner = $request->dinner;
 
         if ($recommendation->save()) {
             Alert::toast('Données enregistrées', 'success');
@@ -85,8 +87,10 @@ class RecommendationController extends Controller
     {
         $recommendation = Recommendation::find($recommendation->id);
 
-        $recommendation->title = $request->title;
-        $recommendation->description = $request->description;
+        $recommendation->day = $request->day;
+        $recommendation->breakfast = $request->breakfast;
+        $recommendation->lunch = $request->lunch;
+        $recommendation->dinner = $request->dinner;
 
         if ($recommendation->save()) {
             Alert::toast('Données enregistrées', 'success');
@@ -115,8 +119,10 @@ class RecommendationController extends Controller
     private function recommendation_columns()
     {
         $columns = (object) array(
-            'title' => 'Titre',
-            'description' => "Description",
+            'day' => 'Jour',
+            'breakfast' => "Petit Déj",
+            'lunch' => "Déjeuner",
+            'dinner' => "Diner",
         );
         return $columns;
     }
@@ -133,15 +139,28 @@ class RecommendationController extends Controller
 
     private function recommendation_fields()
     {
+        $days = [];
+        for ($i=1; $i < 7; $i++) { 
+            $days[] = 'Jour ' . $i;
+        }
         $fields = [
-            'title' => [
+            'day' => [
                 'title' => 'Titre',
-                'field' => 'text'
+                'field' => 'select',
+                'options' => $days
             ],
-            'description' => [
-                'title' => 'Description',
+            'breakfast' => [
+                'title' => 'Petit Déj',
                 'field' => 'textarea'
-            ]
+            ],
+            'lunch' => [
+                'title' => 'Déjeuner',
+                'field' => 'textarea'
+            ],
+            'dinner' => [
+                'title' => 'Diner',
+                'field' => 'textarea'
+            ],
         ];
         return $fields;
     }

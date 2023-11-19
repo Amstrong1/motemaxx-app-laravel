@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Recommendation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRecommendationRequest extends FormRequest
@@ -22,8 +23,10 @@ class StoreRecommendationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
+            'day' => 'required|unique:'.Recommendation::class,
+            'breakfast' => 'required|string',
+            'lunch' => 'required|string',
+            'dinner' => 'required|string',
         ];
     }
 }

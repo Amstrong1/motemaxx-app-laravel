@@ -38,7 +38,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $prestations = Prestation::all();
+        $prestations = Prestation::where('show', true)->get();
         return view('reservation.create', compact('prestations'));
     }
 

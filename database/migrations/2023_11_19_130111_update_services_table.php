@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recommendations', function (Blueprint $table) {
-            $table->id();
-            $table->string('day');
-            $table->text('breakfast');
-            $table->text('lunch');
-            $table->text('dinner');
-            $table->timestamps();
+        Schema::table('prestations', function (Blueprint $table) {
+            $table->boolean('show')->default(1);
         });
     }
 
@@ -26,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recommendations');
+        //
     }
 };

@@ -5,7 +5,7 @@ return [
     'manifest' => [
         'name' => env('APP_NAME'),
         'short_name' => env('APP_NAME'),
-        'start_url' => '/home',
+        'start_url' => '/appiphone',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
         'display' => 'standalone',
@@ -61,7 +61,7 @@ return [
             [
                 'name' => 'home',
                 'description' => 'Access home page',
-                'url' => '/home',
+                'url' => '/appiphone',
                 'icons' => [
                     "src" => "/images/icons/icon-72x72.png",
                     "purpose" => "any"

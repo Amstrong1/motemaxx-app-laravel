@@ -7,8 +7,11 @@
                     <x-forms.edit :item="$consultation" :fields="$my_fields" type="consultation" />
                 </div>
                 <div class="p-6 text-gray-900">
+                    @php
+                        session(['consultation_id' => $consultation->id]);
+                    @endphp
                     <h1>Modifier les réponses</h1>
-                    <x-forms.create :item="$resConsultations" :fields="$my_resFields" type="res_consultation" />
+                    <x-forms.create :fills="$resConsultations" :fields="$my_resFields" type="res_consultation" />
                 </div>
             </div>
         </div>

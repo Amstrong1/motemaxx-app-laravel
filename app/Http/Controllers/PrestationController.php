@@ -16,14 +16,14 @@ class PrestationController extends Controller
      */
     public function index()
     {
-        $prestations = Prestation::all();
         if (Auth::user() == null ||  Auth::user()->admin == false) {
+            $prestations = Prestation::where('show', true)->get();
             return view('prestation.index', [
                 'prestations' => $prestations,
             ]);
         } else {
             return view('admin.prestation.index', [
-                'prestations' => $prestations,
+                'prestations' => Prestation::all(),
                 'my_actions' => $this->prestation_actions(),
                 'my_attributes' => $this->prestation_columns()
             ]);
@@ -53,6 +53,7 @@ class PrestationController extends Controller
         $prestation->name = $request->name;
         $prestation->logo = $fileName;
         $prestation->description = $request->description;
+        $prestation->show = $request->show;
         $prestation->save();
 
         if ($prestation->save()) {
@@ -113,10 +114,9 @@ class PrestationController extends Controller
     {
         $prestation = Prestation::find($prestation->id);
 
-
-
         $prestation->name = $request->name;
         $prestation->description = $request->description;
+        $prestation->show = $request->show;
 
         if ($request->logo !== null) {
             $fileName = time() . '.' . $request->logo->extension();
@@ -169,7 +169,7 @@ class PrestationController extends Controller
         $columns = (object) array(
             'logo' => '',
             'name' => 'Nom',
-            // 'description' => "Description",
+            'status' => "Statut",
         );
         return $columns;
     }
@@ -190,6 +190,14 @@ class PrestationController extends Controller
             'name' => [
                 'title' => 'Nom',
                 'field' => 'text'
+            ],
+            'show' => [
+                'title' => 'Publier',
+                'field' => 'select',
+                'options' => [
+                    'Non',
+                    'Oui',
+                ]
             ],
             'description' => [
                 'title' => 'Description',

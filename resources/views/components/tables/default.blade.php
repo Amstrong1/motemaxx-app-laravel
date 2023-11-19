@@ -37,7 +37,7 @@
                                     @if ($column == 'img' || $column == 'image' || $column == 'photo' || $column == 'logo')
                                         <a class="flex items-center justify-center text-sm hover:opacity-80">
                                             <!-- Avatar OR Image with inset shadow -->
-                                            <div class="relative hidden h-12 w-12 mr-3 md:block">
+                                            <div class="relative h-12 w-12 mr-3 md:block">
                                                 <img class="object-cover w-full h-full rounded-lg"
                                                     src="{{ $resource->{$column} !== null
                                                         ? url('storage/' . $resource->{$column})

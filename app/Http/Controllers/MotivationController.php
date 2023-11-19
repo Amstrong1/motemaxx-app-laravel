@@ -121,7 +121,7 @@ class MotivationController extends Controller
     private function motivation_columns()
     {
         $columns = (object) array(
-            'image' => '',
+            'image' => 'Image',
             'text' => 'Texte',
             'formatted_date' => "Date de publication",
         );
@@ -131,7 +131,6 @@ class MotivationController extends Controller
     private function motivation_actions()
     {
         $actions = (object) array(
-            'show' => 'Voir',
             'edit' => 'Modifier',
             'delete' => "Supprimer",
         );

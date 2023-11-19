@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Motivation;
+use App\Models\Advertisement;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\MotivationController;
 use App\Http\Controllers\PrestationController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\ResConsultationController;
 use App\Http\Controllers\UserConsultationController;
@@ -46,17 +49,20 @@ Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::get('/appiphone', function () {
     $motivation = Motivation::orderBy('id', 'desc')->first();
-    return view('dashboard', compact('motivation'));
+    $advertisements = Advertisement::where('show', true)->orderBy('id', 'desc')->limit(3)->get();
+    return view('dashboard', compact('motivation', 'advertisements'));
 })->middleware(['auth', 'verified'])->name('appiphone');
 
 Route::resource('prestation', PrestationController::class);
 
 Route::resource('motivation', MotivationController::class);
+Route::resource('advertisement', AdvertisementController::class);
 Route::resource('recommendation', RecommendationController::class);
 
 
 Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'], 'reservation/paid/{id}', [ReservationController::class, 'paid'])->name('reservation.paid');
+    Route::resource('user', UserController::class);
     Route::resource('reservation', ReservationController::class);
     Route::resource('consultation', ConsultationController::class);
     Route::resource('res_consultation', ResConsultationController::class);

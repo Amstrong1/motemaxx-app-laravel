@@ -20,8 +20,8 @@
                 </div>
             </div>
 
-            <!-- Notification -->
             <div class="-me-2 flex items-center">
+                <!-- Notification -->
                 <button class="inline-flex items-center justify-center mx-2 p-2 rounded-md text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -30,11 +30,12 @@
                     </svg>
                     <div
                         class="absolute bottom-auto left-auto right-15 top-5 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-neutral-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
-                        0
+                        {{ Auth::user()->unreadNotifications->count() }}
                     </div>
                 </button>
 
-                <a href="{{ route('profile.edit') }}">
+                <!-- Profil -->
+                {{-- <a href="{{ route('profile.edit') }}">
                     <button class="inline-flex items-center justify-center p-2 rounded-md text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="w-6 h-6 block mx-auto">
@@ -43,8 +44,9 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </button>
-                </a>
+                </a> --}}
 
+                <!-- Admin dashboard -->
                 @auth
                     @if (auth()->user()->admin == true)
                         <a href="{{ route('admin.dashboard') }}">
