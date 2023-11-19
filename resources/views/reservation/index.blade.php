@@ -10,10 +10,6 @@
                 </a>
             </div>
 
-            {{-- @php
-                dd($reservations);
-            @endphp --}}
-
             @forelse ($reservations as $reservation)
                 @foreach ($reservation->reservationServices()->get() as $reservationService)
                     <div class="m-4 p-4 text-sm text-gray-900 flex justify-between border rounded-lg shadow-lg">

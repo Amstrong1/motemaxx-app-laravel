@@ -14,7 +14,7 @@
                 @endif
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('appiphone') }}">
                         <x-application-logo class="block sm:h-12 h-9 fill-current text-gray-800" />
                     </a>
                 </div>

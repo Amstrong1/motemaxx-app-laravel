@@ -44,10 +44,10 @@ Route::get('reboot',function(){
 
 Route::get('/', WelcomeController::class)->name('welcome');
 
-Route::get('/home', function () {
+Route::get('/appiphone', function () {
     $motivation = Motivation::orderBy('id', 'desc')->first();
     return view('dashboard', compact('motivation'));
-})->middleware(['auth', 'verified'])->name('home');
+})->middleware(['auth', 'verified'])->name('appiphone');
 
 Route::resource('prestation', PrestationController::class);
 

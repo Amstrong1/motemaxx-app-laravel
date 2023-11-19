@@ -195,7 +195,8 @@
             <div class="flex flex-col justify-around text-center md:text-left mb-20 md:mb-0 mt-10 md:mt-0 md:w-1/2">
 
                 <h1 class="font-bold text-gray-800 text-xl md:text-2xl xl:text-4xl mb-10">
-                    Indulgez dans la Beauté <br> Allumez la Confiance <br> Libérez votre Éclat chez Motemaxx
+                    Allumez la Confiance <br> Libérez votre Éclat chez Motemaxx <br> L'énergie de la beauté dans chaque
+                    battement de cœur
                 </h1>
 
                 <p class="font-normal text-gray-500 text-sm md:text-md xl:text-lg mb-10">
@@ -205,12 +206,15 @@
                 </p>
 
                 <div class="space-y-5 lg:space-x-5 mb-10">
-                    <a href="#services" style="background-color: #c98c3f"
+                    {{-- <a href="#services" style="background-color: #c98c3f"
                         class="block md:inline px-8 py-3 font-medium bg-indigo-800 text-white text-lg rounded-md hover:bg-indigo-600 transiton ease-in-out duration-300">Voir
-                        Plus</a>
-
-                    <a href="{{ route('reservation.index') }}" style="border-color: #c98c3f; color: #c98c3f"
-                        class="block md:inline px-8 py-3 font-medium text-indigo-800 text-lg border-2 border-indigo-800 rounded-md  transiton ease-linear duration-300">Réserver</a>
+                        Plus</a> --}}
+                    <p class="font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Télécharger
+                        l'application </p>
+                    <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
+                        <img src="{{ asset('img/App Store.svg') }}" class="h-12 pr-4 bounce-top-icons">
+                        <img src="{{ asset('img/Play Store.svg') }}" class="h-12 bounce-top-icons">
+                    </div>
                 </div>
             </div>
 
@@ -228,10 +232,10 @@
                     <div class="p-4 flex md:w-1/3">
                         <div
                             class="w-full block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
-                            <div class="overflow-hidden h-64">
+                            {{-- <div class="overflow-hidden h-64">
                                 <img class="w-full rounded-t-lg" src="{{ asset('storage/' . $item->logo) }}"
                                     alt="{{ $item->name }}" />
-                            </div>
+                            </div> --}}
                             <div class="p-6">
                                 <h5
                                     class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
@@ -240,12 +244,12 @@
                                 <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                                     {{ $item->description }}
                                 </p>
-                                <a href="{{ route('prestation.show', $item->id) }}">
+                                <a href="#contact">
                                     <button type="button" style="background-color: #fddb7e; color: #402639"
-                                    class="inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0  active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                                    data-te-ripple-init data-te-ripple-color="light">
-                                    Voir plus
-                                </button>
+                                        class="inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0  active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                                        data-te-ripple-init data-te-ripple-color="light">
+                                        Voir plus
+                                    </button>
                                 </a>
                             </div>
                         </div>
@@ -255,11 +259,10 @@
         </div>
     </section>
 
-    <div id="testimonies"
-        class="p-4 flex items-center justify-center h-sceen md:h-96 bg-fixed bg-center bg-cover brightness-100"
-        style="background-image:url('img/soin.jpg')">
+    <div id="testimonies" class="p-4 flex items-center justify-center h-sceen md:h-96 bg-fixed bg-center bg-cover"
+        style="background-image:url('img/soin.jpg');">
         <!--Carousel-->
-        <div class="absolute w-full h-sceen md:h-96" style="background: rgba(17, 22, 24, .5)"></div>
+        <div class="absolute w-full h-screen md:h-96" style="background: rgba(17, 22, 24, .6)"></div>
         <div id="carouselExampleCaptions" class="relative" data-te-carousel-init data-te-carousel-slide
             data-te-ride="carousel">
             <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
@@ -267,45 +270,47 @@
                 <div class="relative float-left -mr-[100%] hidden w-full text-center transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-te-carousel-active data-te-carousel-item style="backface-visibility: hidden">
                     <p class="mx-auto w-2/3 text-xl italic text-white">
-                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
-                        error amet numquam iure provident voluptate esse quasi, voluptas
-                        nostrum quisquam!"
+                        "J'ai récemment eu l'occasion de profiter d'une journée à l'institut Motemaxx, et cela a
+                        dépassé toutes mes attentes. Des massages apaisants aux différents soins, chaque détail était
+                        pris en compte. J'ai quitté l'institut non seulement détendue, mais aussi avec une peau
+                        éclatante. Je suis impatiente de réserver ma prochaine journée!"
                     </p>
                     <div class="mb-6 mt-12 flex justify-center">
-                        <img src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
+                        <img src="{{ asset('img/anna.webp') }}"
                             class="h-24 w-24 rounded-full shadow-lg dark:shadow-black/30" alt="smaple image" />
                     </div>
-                    <p class="text-white">- Anna Morian</p>
+                    <p class="text-white">- Anna Moriand</p>
                 </div>
 
                 <!--Second Testimonial / Carousel item-->
                 <div class="relative float-left -mr-[100%] hidden w-full text-center transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-te-carousel-item style="backface-visibility: hidden">
                     <p class="mx-auto w-2/3 text-xl italic text-white">
-                        "Neque cupiditate assumenda in maiores repudiandae mollitia
-                        adipisci maiores repudiandae mollitia consectetur adipisicing
-                        architecto elit sed adipiscing elit."
+                        "En tant que mari, je voulais offrir à ma femme une expérience de bien-être unique. L'institut
+                        motemaxx a été la solution parfaite. Ma femme a été choyée de la tête aux pieds avec des soins
+                        du visage luxueux et des massages relaxants. Merci pour le dévouement et l'expertise."
                     </p>
                     <div class="mb-6 mt-12 flex justify-center">
-                        <img src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp"
+                        <img src="{{ asset('img/paul.webp') }}"
                             class="h-24 w-24 rounded-full shadow-lg dark:shadow-black/30" alt="smaple image" />
                     </div>
-                    <p class="text-white">- Teresa May</p>
+                    <p class="text-white">- Paul Lafont</p>
                 </div>
 
                 <!--Third Testimonial / Carousel item-->
                 <div class="relative float-left -mr-[100%] hidden w-full text-center transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-te-carousel-item style="backface-visibility: hidden">
                     <p class="mx-auto w-2/3 text-xl italic text-white">
-                        "Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur est laborum neque
-                        cupiditate assumenda in maiores."
+                        "Je suis une habituée de cet institut de beauté depuis plusieurs mois, et je ne peux pas assez
+                        le recommander. J'ai essayé différents soins du corps et chaque expérience a été relaxante et
+                        bénéfique pour ma peau. L'atmosphère est apaisante, et le service à la clientèle est
+                        exceptionnel. C'est mon havre de paix beauté!"
                     </p>
                     <div class="mb-6 mt-12 flex justify-center">
-                        <img src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
+                        <img src="{{ asset('img/kate.webp') }}"
                             class="h-24 w-24 rounded-full shadow-lg dark:shadow-black/30" alt="smaple image" />
                     </div>
-                    <p class="text-white">- Kate Allise</p>
+                    <p class="text-white">- Kate Alice</p>
                 </div>
             </div>
 
@@ -445,7 +450,7 @@
                 <a class="text-white no-underline hover:no-underline" href="#">&copy; Motemaxx
                     2023</a>
                 {{-- @if (Route::has('login.admin')) --}}
-                <a class="text-white no-underline hover:no-underline" href="{{ route('home') }}">&copy;
+                <a class="text-white no-underline hover:no-underline" href="{{ route('appiphone') }}">&copy;
                     Administration</a>
                 {{-- @endif --}}
             </div>
