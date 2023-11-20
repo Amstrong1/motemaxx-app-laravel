@@ -9,7 +9,7 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    protected $append = ['user_name', 'formatted_date', 'prestation_name', 'hour'];
+    protected $append = ['user_name', 'formatted_date', 'prestation_name', 'hour', 'is_paid'];
 
     public function user()
     {
@@ -50,6 +50,10 @@ class Reservation extends Model
             $hours[] = $getHour->hour;
         }
         return $hours;
+    }
+
+    public function getIsPaidAttribute(){
+        return $this->paid == true ? 'Oui' : 'Non';
     }
 
 }

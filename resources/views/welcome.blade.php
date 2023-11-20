@@ -116,11 +116,11 @@
                         <!-- Sidenav -->
                         <nav id="sidenav-7"
                             class="fixed right-0 z-[1035] h-screen w-60 translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:-translate-x-0 dark:bg-zinc-800"
-                            style="top: 7rem" data-te-sidenav-init data-te-sidenav-hidden="true"
+                            style="top: 4.5rem" data-te-sidenav-init data-te-sidenav-hidden="true"
                             data-te-sidenav-right="true">
                             <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
                                 <li class="relative">
-                                    <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                    <a href="/" class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                         data-te-sidenav-link-ref>
                                         <span
                                             class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
@@ -212,8 +212,8 @@
                     <p class="font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Télécharger
                         l'application </p>
                     <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
-                        <img src="{{ asset('img/app_store.svg') }}" class="h-12 pr-4 bounce-top-icons">
-                        <img src="{{ asset('img/play_store.svg') }}" class="h-12 bounce-top-icons">
+                        <img src="{{ asset('img/app_store.svg') }}" class="h-8 md:h-12 pr-4 bounce-top-icons">
+                        <img src="{{ asset('img/play_store.svg') }}" class="h-8 md:h-12 bounce-top-icons">
                     </div>
                 </div>
             </div>
@@ -269,7 +269,7 @@
                 <!--First Testimonial / Carousel item-->
                 <div class="relative float-left -mr-[100%] hidden w-full text-center transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-te-carousel-active data-te-carousel-item style="backface-visibility: hidden">
-                    <p class="mx-auto w-2/3 text-xl italic text-white">
+                    <p class="mx-auto w-2/3 text-md md:text-xl italic text-white">
                         "J'ai récemment eu l'occasion de profiter d'une journée à l'institut Motemaxx, et cela a
                         dépassé toutes mes attentes. Des massages apaisants aux différents soins, chaque détail était
                         pris en compte. J'ai quitté l'institut non seulement détendue, mais aussi avec une peau
@@ -285,7 +285,7 @@
                 <!--Second Testimonial / Carousel item-->
                 <div class="relative float-left -mr-[100%] hidden w-full text-center transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-te-carousel-item style="backface-visibility: hidden">
-                    <p class="mx-auto w-2/3 text-xl italic text-white">
+                    <p class="mx-auto w-2/3 text-md md:text-xl italic text-white">
                         "En tant que mari, je voulais offrir à ma femme une expérience de bien-être unique. L'institut
                         motemaxx a été la solution parfaite. Ma femme a été choyée de la tête aux pieds avec des soins
                         du visage luxueux et des massages relaxants. Merci pour le dévouement et l'expertise."
@@ -300,7 +300,7 @@
                 <!--Third Testimonial / Carousel item-->
                 <div class="relative float-left -mr-[100%] hidden w-full text-center transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-te-carousel-item style="backface-visibility: hidden">
-                    <p class="mx-auto w-2/3 text-xl italic text-white">
+                    <p class="mx-auto w-2/3 text-md md:text-xl italic text-white">
                         "Je suis une habituée de cet institut de beauté depuis plusieurs mois, et je ne peux pas assez
                         le recommander. J'ai essayé différents soins du corps et chaque expérience a été relaxante et
                         bénéfique pour ma peau. L'atmosphère est apaisante, et le service à la clientèle est

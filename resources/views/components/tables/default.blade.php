@@ -52,9 +52,9 @@
                                         <span @class([
                                             'whitespace-nowrap px-2 py-1 font-semibold leading-tight rounded-full',
                                             'text-green-700 bg-green-100  dark:bg-green-700 dark:text-green-100' =>
-                                                $resource->$column == 'Terminé',
-                                            ' text-gray-700 bg-gray-100 dark:text-gray-100  dark:bg-gray-700' =>
-                                                $resource->$column == 'En cours',
+                                                $resource->$column == 'Acceptée',
+                                            ' text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700' =>
+                                                $resource->$column == 'Rejetée',
                                             ' text-gray-700 bg-yellow-100 dark:text-gray-100 dark:bg-yellow-700' =>
                                                 $resource->$column == 'En attente',
                                         ])>

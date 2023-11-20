@@ -35,7 +35,16 @@
                                     </svg>
                                 </button>
                             </form>
-                            <span class="text-xs italic">{{ $reservation->status }}</span>
+                            <div><span class="text-xs italic">{{ $reservation->status }}</span></div>
+                            <div>
+                                <span class="text-xs italic">
+                                    @if ($reservation->paid == true)
+                                        Payé
+                                    @else
+                                        Non payé
+                                    @endif
+                                </span>
+                            </div>
                         </div>
                     </div>
                 @endforeach

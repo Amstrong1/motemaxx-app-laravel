@@ -21,34 +21,59 @@
             </div>
 
             <div class="-me-2 flex items-center">
-                <!-- Notification -->
-                <button class="inline-flex items-center justify-center mx-2 p-2 rounded-md text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                    </svg>
-                    <div
-                        class="absolute bottom-auto left-auto right-15 top-5 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-neutral-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
-                        {{ Auth::user()->unreadNotifications->count() }}
-                    </div>
-                </button>
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button class="inline-flex items-center justify-center mx-2 p-2 rounded-md text-white">
+                            <div>
+                                <a class="hidden-arrow mr-4 flex items-center text-white transition duration-200 hover:text-white hover:ease-in-out focus:text-white disabled:text-black/30 motion-reduce:transition-none dark:text-white dark:hover:text-white dark:focus:text-white [&.active]:text-black/90 dark:[&.active]:text-white"
+                                    href="#" id="dropdownMenuButton1" role="button" data-te-dropdown-toggle-ref
+                                    aria-expanded="false">
+                                    <!-- Dropdown trigger icon -->
+                                    <span class="[&>svg]:w-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                                        </svg>
+                                    </span>
+                                    <!-- Notification counter -->
+                                    <span
+                                        class="absolute -mt-6 ml-4 rounded-full bg-danger px-1 py-[0.15rem] text-xs font-bold leading-none text-white">
+                                        {{ Auth::user()->unreadNotifications->count() }}
+                                    </span>
+                                </a>
+                            </div>
+                        </button>
+                    </x-slot>
 
-                <!-- Profil -->
-                {{-- <a href="{{ route('profile.edit') }}">
-                    <button class="inline-flex items-center justify-center p-2 rounded-md text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="w-6 h-6 block mx-auto">
-                            <path fill-rule="evenodd"
-                                d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </a> --}}
+                    <x-slot name="content">
+                        @foreach (Auth::user()->unreadNotifications as $notification)
+                            <x-dropdown-link>
+                                {{-- @if ($notification->data['link'] !== null) href="{{ route($notification->data['link']) }}" @endif> --}}
+                                <p class="text-sm">
+                                    {{ $notification->data['message'] }}
+                                </p>
+
+                                <p class="text-xs">{{ getFormattedDate($notification->created_at) }}</p>
+                            </x-dropdown-link>
+                        @endforeach
+                    </x-slot>
+                </x-dropdown>
 
                 <!-- Admin dashboard -->
                 @auth
                     @if (auth()->user()->admin == true)
+                        <!-- Portefeuille -->
+                        <a href="">
+                            <button class="inline-flex items-center justify-center p-2 rounded-md text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                                </svg>
+                            </button>
+                        </a>
+
                         <a href="{{ route('admin.dashboard') }}">
                             <button class="inline-flex items-center justify-center p-2 rounded-md text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

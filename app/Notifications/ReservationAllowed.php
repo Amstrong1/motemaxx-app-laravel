@@ -26,7 +26,7 @@ class ReservationAllowed extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -35,9 +35,10 @@ class ReservationAllowed extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Votre réservation a été validée')
+                    // ->action('Notification Action', url('/'))
+                    ->line('Merci de votre confiance!')
+                    ->line('Institut Motemaxx');
     }
 
     /**
@@ -48,7 +49,7 @@ class ReservationAllowed extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'message' => 'Votre réservation a été validée',
         ];
     }
 }

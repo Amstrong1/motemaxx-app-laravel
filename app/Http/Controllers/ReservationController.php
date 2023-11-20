@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 use App\Models\HourReservation;
 use App\Models\ReservationService;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NewReservation;
+use App\Notifications\ReservationDenied;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\ReservationAllowed;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 
@@ -21,12 +24,12 @@ class ReservationController extends Controller
     public function index()
     {
         if (Auth::user()->admin == false) {
-            $reservations = Reservation::where('user_id', Auth::user()->id)->get();
+            $reservations = Reservation::where('user_id', Auth::user()->id)->with('reservationServices')->get();
             session(['prestation_id' => null]);
             return view('reservation.index', compact('reservations'));
         } else {
             return view('admin.reservation.index', [
-                'reservations' => Reservation::orderBy('date', 'desc')->get(),
+                'reservations' => Reservation::where('date', '>=', date('Y-m-d'))->orderBy('date', 'desc')->get(),
                 'my_actions' => $this->reservation_actions(),
                 'my_attributes' => $this->reservation_columns()
             ]);
@@ -47,21 +50,31 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request)
     {
-        $checkDates = Reservation::where('date', date("Y-m-d", strtotime($request->input('date'))))->get();
-        foreach ($checkDates as $checkDate) {
-            foreach ($checkDate->hourReservations()->get() as $checkTime) {
-                for ($i = 1; $i < count($request->input('hours')); $i++) {
-                    if ($checkTime->hour == $request->input('hours')[$i]) {
-                        Alert::toast("Réservation non disponible pour " . $request->input('hours')[$i], 'error');
-                        return redirect()->back()->withInput($request->input());
+        if ($request->input('prestation_id') == null && $request->input('prestations') == null) {
+            Alert::toast("Aucun service sélectionné", 'error');
+            return redirect()->back()->withInput($request->input());
+        } else {
+            if ($request->input('hours')[0] !== null) {
+                $checkDates = Reservation::where('date', date("Y-m-d", strtotime($request->input('date'))))->where('paid', true)->get();
+                foreach ($checkDates as $checkDate) {
+                    foreach ($checkDate->hourReservations()->get() as $checkTime) {
+                        for ($i = 1; $i < count($request->input('hours')); $i++) {
+                            if ($checkTime->hour == $request->input('hours')[$i]) {
+                                Alert::toast("Réservation non disponible pour " . $request->input('hours')[$i], 'error');
+                                return redirect()->back()->withInput($request->input());
+                            }
+                        }
                     }
                 }
+            } else {
+                Alert::toast("Aucune heure sélectionnée", 'error');
+                return redirect()->back()->withInput($request->input());
             }
         }
 
         $reservation = new Reservation();
         $reservation->user_id = Auth::user()->id;
-        $reservation->date = date("Y-m-d", strtotime($request->input('date')));
+        $reservation->date = date("Y-m-d", strtotime(str_replace('/', '-', $request->input('date'))));
         $reservation->save();
 
         for ($i = 1; $i < count($request->input('hours')); $i++) {
@@ -71,12 +84,14 @@ class ReservationController extends Controller
             $hourReservation->save();
         }
 
-        $reservationService = new ReservationService();
-        $reservationService->reservation_id = $reservation->id;
-        $reservationService->prestation_id = $request->input('prestation_id');
-        $reservationService->save();
+        if ($request->input('prestation_id') !== null) {
+            $reservationService = new ReservationService();
+            $reservationService->reservation_id = $reservation->id;
+            $reservationService->prestation_id = $request->input('prestation_id');
+            $reservationService->save();
+        }
 
-        if ($request->input('prestations') == null) {
+        if ($request->input('prestations') !== null) {
             for ($i = 1; $i < count($request->input('prestations')); $i++) {
                 $reservationService = new ReservationService();
                 $reservationService->reservation_id = $reservation->id;
@@ -84,11 +99,6 @@ class ReservationController extends Controller
                 $reservationService->save();
             }
         }
-
-        $admins = User::where('admin', true)->get();
-        // foreach ($admins as $admin) {
-        //     $admin->notify(new NewReservation());
-        // }
 
         if ($reservation->save()) {
             Alert::toast("Réservation éffectué", 'success');
@@ -106,6 +116,11 @@ class ReservationController extends Controller
             $reservation->paid = true;
 
             if ($reservation->save()) {
+
+                $admins = User::where('admin', true)->get();
+                foreach ($admins as $admin) {
+                    $admin->notify(new NewReservation());
+                }
                 Alert::toast("Réservation payé", 'success');
                 return redirect()->route('reservation.index');
             } else {
@@ -130,7 +145,10 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+        return view('admin.reservation.edit', [
+            'reservation' => $reservation,
+            'my_fields' => $this->reservation_fields(),
+        ]);
     }
 
     /**
@@ -138,7 +156,21 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
-        //
+        $reservation->status = $request->status;
+
+        if ($reservation->save()) {
+            if ($reservation->status == 'Acceptée') {
+                $reservation->user->notify(new ReservationAllowed());
+            } else {
+                $reservation->user->notify(new ReservationDenied());
+            }
+
+            Alert::toast('Reservation modifié', 'success');
+            return redirect('reservation');
+        } else {
+            Alert::toast('Reservation modifié', 'success');
+            return back()->withInput($request->input());
+        }
     }
 
     /**
@@ -146,10 +178,18 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
+        $reservationService = ReservationService::where('reservation_id', $reservation->id)->get();
+        foreach ($reservationService as $service) {
+            $service->delete();
+        }
+        $reservationHour = HourReservation::where('reservation_id', $reservation->id)->get();
+        foreach ($reservationHour as $hour) {
+            $hour->delete();
+        }
         try {
             $reservation = $reservation->delete();
             Alert::success('Opération effectuée', 'Suppression éffectué');
-            return redirect('task');
+            return redirect('reservation');
         } catch (\Exception $e) {
             Alert::error('Erreur', 'Element introuvable');
             return redirect()->back();
@@ -164,6 +204,7 @@ class ReservationController extends Controller
             'formatted_date' => 'Date',
             'hour' => "Heure",
             'status' => "Statut",
+            'is_paid' => "Payé",
         );
         return $columns;
     }
@@ -174,5 +215,20 @@ class ReservationController extends Controller
             'edit' => 'Modifier',
         );
         return $actions;
+    }
+
+    private function reservation_fields()
+    {
+        $fields = [
+            'status' => [
+                'title' => 'Statut',
+                'field' => 'select',
+                'options' => [
+                    'Acceptée' => 'Accepter',
+                    'Rejetée' => 'Rejeter',
+                ]
+            ],
+        ];
+        return $fields;
     }
 }
