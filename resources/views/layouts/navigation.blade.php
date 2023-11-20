@@ -47,7 +47,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        @foreach (Auth::user()->unreadNotifications as $notification)
+                        @forelse (Auth::user()->unreadNotifications as $notification)
                             <x-dropdown-link href="{{ route($notification->data['link']) }}">
                                 <p class="text-sm">
                                     {{ $notification->data['message'] }}
@@ -55,7 +55,11 @@
 
                                 <p class="text-xs">{{ getFormattedDate($notification->created_at) }}</p>
                             </x-dropdown-link>
-                        @endforeach
+                        @empty
+                            <p class="text-sm p-4">
+                                Aucune notification
+                            </p>
+                        @endforelse
                     </x-slot>
                 </x-dropdown>
 
