@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Recommendation extends Model
 {
     use HasFactory;
+
+    protected $append = ['formatted_day'];
+
+    public function getFormattedDayAttribute()
+    {
+        return $this->day + 1;
+    }
 }

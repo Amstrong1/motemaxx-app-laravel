@@ -47,6 +47,12 @@
             @endif
         </div>
 
+        <div>
+            <x-input-label style="color: #000" for="tel" :value="__('Contact')" />
+            <x-text-input style="color: #000" id="tel" name="tel" type="tel" class="mt-1 block w-full" :value="old('tel', $user->tel)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('tel')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
 

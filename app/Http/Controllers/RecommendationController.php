@@ -119,7 +119,7 @@ class RecommendationController extends Controller
     private function recommendation_columns()
     {
         $columns = (object) array(
-            'day' => 'Jour',
+            'formatted_day' => 'Jour',
             'breakfast' => "Petit Déj",
             'lunch' => "Déjeuner",
             'dinner' => "Diner",
@@ -140,7 +140,7 @@ class RecommendationController extends Controller
     private function recommendation_fields()
     {
         $days = [];
-        for ($i=1; $i < 7; $i++) { 
+        for ($i=1; $i < 8; $i++) { 
             $days[] = 'Jour ' . $i;
         }
         $fields = [

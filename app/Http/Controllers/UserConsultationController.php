@@ -111,7 +111,7 @@ class UserConsultationController extends Controller
         $columns = (object) array(
             'user_name' => 'Client',
             'consultation_name' => 'Consultation',
-            'answer' => 'answer',
+            'answer' => 'Reponse',
             'description' => 'Description',
             'formatted_date' => 'Date',
         );
