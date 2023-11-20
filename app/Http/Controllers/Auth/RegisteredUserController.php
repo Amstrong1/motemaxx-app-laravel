@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
-use App\Notifications\NewUserRegistration;
 
 class RegisteredUserController extends Controller
 {
@@ -44,13 +43,6 @@ class RegisteredUserController extends Controller
             'tel' => $request->tel,
             'password' => Hash::make($request->password),
         ]);
-
-        if ($user->admin == false) {
-            $admins = User::where('admin', true)->get();
-            foreach ($admins as $admin) {
-                $admin->notify(new NewUserRegistration());
-            }
-        }
 
         event(new Registered($user));
 

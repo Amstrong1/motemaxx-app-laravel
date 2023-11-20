@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserConsultation;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\NewUserRegistration;
 use App\Http\Requests\StoreUserConsultationRequest;
 use App\Http\Requests\UpdateUserConsultationRequest;
 
@@ -56,6 +58,10 @@ class UserConsultationController extends Controller
             }
 
             if ($userConsultation->save()) {
+                $admins = User::where('admin', true)->get();
+                foreach ($admins as $admin) {
+                    $admin->notify(new NewUserRegistration());
+                }
                 Alert::toast("Vos réponses ont été pris en compte", 'success');
                 return redirect('consultation');
             } else {
@@ -99,7 +105,7 @@ class UserConsultationController extends Controller
     {
         //
     }
-    
+
     private function userConsultations_columns()
     {
         $columns = (object) array(

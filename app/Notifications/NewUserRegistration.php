@@ -38,7 +38,7 @@ class NewUserRegistration extends Notification
             ->line('Nouvel utilisateur enregistré.')
             ->line('Nom : ' . $notifiable->name)
             ->line('Email : ' . $notifiable->email)
-            ->line('<a href=tel:' . $notifiable->tel . '> Contact : ' . $notifiable->tel . '</a>');
+            ->line('Contact : ' . $notifiable->tel);
             // ->action('Notification Action', url('/'))
             // ->line('Thank you for using our application!');
     }

@@ -212,8 +212,8 @@
                     <p class="font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Télécharger
                         l'application </p>
                     <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
-                        <img src="{{ asset('img/App Store.svg') }}" class="h-12 pr-4 bounce-top-icons">
-                        <img src="{{ asset('img/Play Store.svg') }}" class="h-12 bounce-top-icons">
+                        <img src="{{ asset('img/app_store.svg') }}" class="h-12 pr-4 bounce-top-icons">
+                        <img src="{{ asset('img/play_store.svg') }}" class="h-12 bounce-top-icons">
                     </div>
                 </div>
             </div>
@@ -232,10 +232,10 @@
                     <div class="p-4 flex md:w-1/3">
                         <div
                             class="w-full block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
-                            {{-- <div class="overflow-hidden h-64">
+                            <div class="overflow-hidden h-64">
                                 <img class="w-full rounded-t-lg" src="{{ asset('storage/' . $item->logo) }}"
                                     alt="{{ $item->name }}" />
-                            </div> --}}
+                            </div>
                             <div class="p-6">
                                 <h5
                                     class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
