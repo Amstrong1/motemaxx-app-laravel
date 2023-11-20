@@ -51,6 +51,7 @@
                 </a>
             </div>
 
+            @if ($advertisements->count() !== 0)
             <div id="carouselExampleControls" class="relative m-4" data-te-carousel-init data-te-ride="carousel">
                 <h2 class="pt-6 text-gray-900 uppercase text-center font-bold">{{ __('Publicités') }}</h2>
                 <!--Carousel items-->
@@ -111,6 +112,7 @@
                         class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Next</span>
                 </button>
             </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

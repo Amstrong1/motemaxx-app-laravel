@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 use App\Models\HourReservation;
 use App\Models\ReservationService;
 use Illuminate\Support\Facades\Auth;
-use App\Notifications\NewReservation;
-use App\Notifications\ReservationDenied;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Notifications\ReservationAllowed;
+use App\Notifications\ReservationConfirme;
+use App\Notifications\NouvelleReservation;
+use App\Notifications\ReservationNonConfirme;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 
@@ -136,7 +136,7 @@ class ReservationController extends Controller
 
                 $admins = User::where('admin', true)->get();
                 foreach ($admins as $admin) {
-                    $admin->notify(new NewReservation());
+                    $admin->notify(new NouvelleReservation());
                 }
                 Alert::toast("Réservation payé", 'success');
                 return redirect()->route('reservation.index');
@@ -177,9 +177,9 @@ class ReservationController extends Controller
 
         if ($reservation->save()) {
             if ($reservation->status == 'Acceptée') {
-                $reservation->user->notify(new ReservationAllowed());
+                $reservation->user->notify(new ReservationConfirme());
             } else {
-                $reservation->user->notify(new ReservationDenied());
+                $reservation->user->notify(new ReservationNonConfirme());
             }
 
             Alert::toast('Reservation modifié', 'success');

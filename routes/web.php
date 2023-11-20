@@ -45,7 +45,8 @@ Route::get('reboot',function(){
       dd('All done!');
   });
 
-Route::get('/', WelcomeController::class)->name('welcome');
+  Route::get('/', WelcomeController::class)->name('welcome');
+  Route::post('/mail', [WelcomeController::class, 'mail'])->name('mail');
 
 Route::get('/appiphone', function () {
     $motivation = Motivation::where('publication_date', '<=', date('Y-m-d'))->orderBy('id', 'desc')->first();
@@ -61,6 +62,7 @@ Route::resource('recommendation', RecommendationController::class);
 
 
 Route::middleware('auth')->group(function () {
+    
     Route::match(['get', 'post'], 'reservation/paid/{id}', [ReservationController::class, 'paid'])->name('reservation.paid');
     Route::resource('user', UserController::class);
     Route::resource('reservation', ReservationController::class);

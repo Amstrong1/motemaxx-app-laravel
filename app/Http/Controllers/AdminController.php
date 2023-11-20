@@ -35,4 +35,12 @@ class AdminController extends Controller
             'userConsultations',
         ));
     }
+
+    public function indexMail(){      
+        return view('admin.mail.index');
+    }
+
+    public function showMail(){      
+        return view('admin.mail.show');
+    }
 }

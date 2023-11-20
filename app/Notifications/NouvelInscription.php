@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ReservationDenied extends Notification
+class NouvelInscription extends Notification
 {
     use Queueable;
 
@@ -35,10 +35,10 @@ class ReservationDenied extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Votre demande n\'a malheureusement pas été acceptée.')
-            ->line('Veuillez reessayer plus tard.')
-            ->action('Voir', url('/reservation'))
-            ->line('Merci de votre confiance!');
+            ->line('Nouvel utilisateur enregistré.')
+            ->line('Nom : ' . $notifiable->name)
+            ->line('Email : ' . $notifiable->email)
+            ->line('Contact : ' . $notifiable->tel);
     }
 
     /**
@@ -49,8 +49,8 @@ class ReservationDenied extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => 'Votre réservation n\'a pas été validée',
-            'link' => 'reservation.index'
+            'message' => 'Nouvel utilisateur enregistré',
+            'link' => 'user.index'
         ];
     }
 }

@@ -358,7 +358,7 @@
 
                         <div class="block rounded-lg bg-white p-6 shadow-xl dark:bg-neutral-700">
                             <h2 class="text-center font-bold mb-2">Contact</h2>
-                            <form action="" id="form" method="POST" x-data="validateContactForm()"
+                            <form action="{{ route('mail') }}" id="form" method="POST" x-data="validateContactForm()"
                                 x-init="$watch('name', value => { validate('name') })
                                 $watch('email', value => { validate('email') })
                                 $watch('message', value => { validate('message') })">
@@ -368,8 +368,8 @@
                                 <div class="relative mb-6">
                                     <label for="name" class="">Nom
                                     </label>
-                                    <input x-model="name" type="text" id="name" name="name"
-                                        class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" />
+                                    <input x-model="name" type="text" id="name" name="name" required
+                                        class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" />
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     <span class="text-sm italic text-red-500 mt-2">
                                         <div x-text="validation.name.message"></div>
@@ -380,8 +380,8 @@
                                 <div class="relative mb-6">
                                     <label for="email" class="">Email
                                     </label>
-                                    <input x-model="email" type="email" name="email"
-                                        class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                    <input x-model="email" type="email" name="email" required
+                                        class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                         id="email" placeholder="Email" />
                                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     <span class="text-sm italic text-red-500 mt-2">
@@ -393,8 +393,8 @@
                                 <div class="relative mb-6">
                                     <label for="object" class="">Objet
                                     </label>
-                                    <input x-model="object" type="text" name="object"
-                                        class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                    <input x-model="object" type="text" name="object" required
+                                        class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                         id="object" placeholder="Email" />
                                     <x-input-error :messages="$errors->get('object')" class="mt-2" />
                                     <span class="text-sm italic text-red-500 mt-2">
@@ -406,8 +406,8 @@
                                 <div class="relative mb-6">
                                     <label for="message" class="">Message
                                     </label>
-                                    <textarea x-model="message" name="message"
-                                        class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                    <textarea x-model="message" name="message" required
+                                        class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                         id="message" rows="3" placeholder="Message"></textarea>
                                     <x-input-error :messages="$errors->get('message')" class="mt-2" />
                                     <span class="text-sm italic text-red-500 mt-2">
@@ -456,6 +456,8 @@
             </div>
         </div>
     </footer>
+
+    @include('sweetalert::alert')
 
     <script async src="//www.google.com/recaptcha/api.js"></script>
     <script>

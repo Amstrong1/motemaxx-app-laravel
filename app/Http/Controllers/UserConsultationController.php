@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\UserConsultation;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Notifications\NewUserRegistration;
+use App\Notifications\NouvelInscription;
 use App\Http\Requests\StoreUserConsultationRequest;
 use App\Http\Requests\UpdateUserConsultationRequest;
 
@@ -60,7 +60,7 @@ class UserConsultationController extends Controller
             if ($userConsultation->save()) {
                 $admins = User::where('admin', true)->get();
                 foreach ($admins as $admin) {
-                    $admin->notify(new NewUserRegistration());
+                    $admin->notify(new NouvelInscription());
                 }
                 Alert::toast("Vos réponses ont été pris en compte", 'success');
                 return redirect('appiphone');

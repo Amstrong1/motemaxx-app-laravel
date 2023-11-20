@@ -46,6 +46,14 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        $userLoginData = [
+            'user_id' => $user->id,
+            'login_time' => now(),
+        ];
+
+        $minutes = 60 * 24 * 365; // 365 days
+        cookie('user_login_data', json_encode($userLoginData), $minutes);
+
         Auth::login($user);
 
         if ($user->admin == false) {
