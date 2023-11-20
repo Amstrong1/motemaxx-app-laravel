@@ -12,6 +12,16 @@ class UserController extends Controller
      */
     public function index()
     {
+        $admins = User::where('admin', true)->get();
+
+        foreach ($admins as $admin) {
+            foreach ($admin->unreadNotifications as $notification) {
+                if ($notification->data['link'] == "user.index") {
+                    $notification->markAsRead();
+                }
+            }
+        }
+
         return view('admin.user.index', [
             'users' => User::where('admin', false)->get(),
             'my_actions' => $this->user_actions(),

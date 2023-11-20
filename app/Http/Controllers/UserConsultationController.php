@@ -63,7 +63,7 @@ class UserConsultationController extends Controller
                     $admin->notify(new NewUserRegistration());
                 }
                 Alert::toast("Vos réponses ont été pris en compte", 'success');
-                return redirect('consultation');
+                return redirect('appiphone');
             } else {
                 Alert::toast('Une erreur est survenue', 'error');
                 return redirect()->back()->withInput($request->input());

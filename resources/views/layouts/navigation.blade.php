@@ -48,8 +48,7 @@
 
                     <x-slot name="content">
                         @foreach (Auth::user()->unreadNotifications as $notification)
-                            <x-dropdown-link>
-                                {{-- @if ($notification->data['link'] !== null) href="{{ route($notification->data['link']) }}" @endif> --}}
+                            <x-dropdown-link href="{{ route($notification->data['link']) }}">
                                 <p class="text-sm">
                                     {{ $notification->data['message'] }}
                                 </p>

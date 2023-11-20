@@ -24,10 +24,27 @@ class ReservationController extends Controller
     public function index()
     {
         if (Auth::user()->admin == false) {
+
+            foreach (Auth::user()->unreadNotifications as $notification) {
+                if ($notification->data['link'] == "reservation.index") {
+                    $notification->markAsRead();
+                }
+            }
+
             $reservations = Reservation::where('user_id', Auth::user()->id)->with('reservationServices')->get();
             session(['prestation_id' => null]);
             return view('reservation.index', compact('reservations'));
         } else {
+
+            $admins = User::where('admin', true)->get();
+            foreach ($admins as $admin) {
+                foreach ($admin->unreadNotifications as $notification) {
+                    if ($notification->data['link'] == "reservation.index") {
+                        $notification->markAsRead();
+                    }
+                }
+            }
+
             return view('admin.reservation.index', [
                 'reservations' => Reservation::where('date', '>=', date('Y-m-d'))->orderBy('date', 'desc')->get(),
                 'my_actions' => $this->reservation_actions(),
@@ -178,21 +195,30 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        $reservationService = ReservationService::where('reservation_id', $reservation->id)->get();
-        foreach ($reservationService as $service) {
-            $service->delete();
-        }
-        $reservationHour = HourReservation::where('reservation_id', $reservation->id)->get();
-        foreach ($reservationHour as $hour) {
-            $hour->delete();
-        }
-        try {
-            $reservation = $reservation->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
-            return redirect('reservation');
-        } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
-            return redirect()->back();
+        if ($reservation->paid == false) {
+            $reservationService = ReservationService::where('reservation_id', $reservation->id)->get();
+            foreach ($reservationService as $service) {
+                $service->delete();
+            }
+            $reservationHour = HourReservation::where('reservation_id', $reservation->id)->get();
+            foreach ($reservationHour as $hour) {
+                $hour->delete();
+            }
+            try {
+                $reservation = $reservation->delete();
+                Alert::success('Opération effectuée', 'Suppression éffectué');
+                return redirect('reservation');
+            } catch (\Exception $e) {
+                Alert::error('Erreur', 'Element introuvable');
+                return redirect()->back();
+            }
+        } else {
+            $reservation->status = 'Annulée';
+
+            if ($reservation->save()) {
+                Alert::toast('Reservation annulée', 'error');
+                return redirect()->back();
+            }
         }
     }
 

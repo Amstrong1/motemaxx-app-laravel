@@ -36,7 +36,7 @@ class NewReservation extends Notification
     {
         return (new MailMessage)
             ->line('Une nouvelle réservation a été effectue.')
-            ->action('Voir', url('/'));
+            ->action('Voir', url('/reservation'));
     }
 
     /**
@@ -48,6 +48,7 @@ class NewReservation extends Notification
     {
         return [
             'message' => 'Une nouvelle réservation a été effectue.',
+            'link' => 'reservation.index'
         ];
     }
 }

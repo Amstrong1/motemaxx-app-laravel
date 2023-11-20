@@ -37,7 +37,7 @@ class ReservationDenied extends Notification
         return (new MailMessage)
             ->line('Votre demande n\'a malheureusement pas été acceptée.')
             ->line('Veuillez reessayer plus tard.')
-            // ->action('Notification Action', url('/'))
+            ->action('Voir', url('/reservation'))
             ->line('Merci de votre confiance!');
     }
 
@@ -49,7 +49,8 @@ class ReservationDenied extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'message' => 'Votre réservation n\'a pas été validée',
+            'link' => 'reservation.index'
         ];
     }
 }

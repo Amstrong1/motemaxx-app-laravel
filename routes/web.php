@@ -48,7 +48,7 @@ Route::get('reboot',function(){
 Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::get('/appiphone', function () {
-    $motivation = Motivation::orderBy('id', 'desc')->first();
+    $motivation = Motivation::where('publication_date', '<=', date('Y-m-d'))->orderBy('id', 'desc')->first();
     $advertisements = Advertisement::where('show', true)->orderBy('id', 'desc')->limit(3)->get();
     return view('dashboard', compact('motivation', 'advertisements'));
 })->middleware(['auth', 'verified'])->name('appiphone');

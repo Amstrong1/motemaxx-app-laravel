@@ -36,7 +36,7 @@ class ReservationAllowed extends Notification
     {
         return (new MailMessage)
                     ->line('Votre réservation a été validée')
-                    // ->action('Notification Action', url('/'))
+                    ->action('Voir', url('/reservation'))
                     ->line('Merci de votre confiance!')
                     ->line('Institut Motemaxx');
     }
@@ -50,6 +50,7 @@ class ReservationAllowed extends Notification
     {
         return [
             'message' => 'Votre réservation a été validée',
+            'link' => 'reservation.index'
         ];
     }
 }

@@ -52,7 +52,7 @@ class NewUserRegistration extends Notification
     {
         return [
             'message' => 'Nouvel utilisateur enregistré',
-            'link' => 'user.show, ' . $notifiable->id
+            'link' => 'user.index'
         ];
     }
 }

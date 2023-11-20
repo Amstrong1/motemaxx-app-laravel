@@ -140,7 +140,6 @@ class ConsultationController extends Controller
     {
         $columns = (object) array(
             'name' => 'Texte',
-            // 'formatted_date' => "Date de publication",
         );
         return $columns;
     }
