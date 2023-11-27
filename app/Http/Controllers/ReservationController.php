@@ -11,7 +11,6 @@ use App\Models\ReservationService;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\ReservationConfirme;
-use App\Notifications\NouvelleReservation;
 use App\Notifications\ReservationNonConfirme;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
@@ -31,7 +30,7 @@ class ReservationController extends Controller
                 }
             }
 
-            $reservations = Reservation::where('user_id', Auth::user()->id)->with('reservationServices')->get();
+            $reservations = Reservation::where('user_id', Auth::user()->id)->with('reservationServices')->orderBy('date', 'desc')->get();
             session(['prestation_id' => null]);
             return view('reservation.index', compact('reservations'));
         } else {
