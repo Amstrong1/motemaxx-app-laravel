@@ -54,6 +54,7 @@ class PrestationController extends Controller
         $prestation->logo = $fileName;
         $prestation->description = $request->description;
         $prestation->show = $request->show;
+        $prestation->price = $request->price;
         $prestation->save();
 
         if ($prestation->save()) {
@@ -116,6 +117,7 @@ class PrestationController extends Controller
 
         $prestation->name = $request->name;
         $prestation->description = $request->description;
+        $prestation->price = $request->price;
         $prestation->show = $request->show;
 
         if ($request->logo !== null) {
@@ -190,6 +192,10 @@ class PrestationController extends Controller
             'name' => [
                 'title' => 'Nom',
                 'field' => 'text'
+            ],
+            'price' => [
+                'title' => 'Prix',
+                'field' => 'number'
             ],
             'show' => [
                 'title' => 'Publier',

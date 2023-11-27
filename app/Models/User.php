@@ -46,6 +46,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
+    }
+
     public function getFormattedDateAttribute() {
         return getFormattedDate($this->created_at);
     }

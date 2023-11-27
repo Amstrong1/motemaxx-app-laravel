@@ -49,14 +49,20 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+        
+        foreach ($user->reservations()->get() as $key) {
+            $key->reservationServices()->delete();
+            $key->hourReservations()->delete();
+            $key->delete();
+        }
 
         Auth::logout();
-
+        
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/appiphone');
     }
 }

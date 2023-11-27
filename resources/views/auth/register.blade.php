@@ -4,7 +4,7 @@
 
         <!-- Name -->
         <div class="mt-8">
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nom')" />
             <x-text-input style="background-color: rgba(63, 38, 57, 1)" id="name" class="block mt-1 w-full"
                 type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -28,7 +28,7 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label class="text-white" for="password" :value="__('Password')" />
+            <x-input-label class="text-white" for="password" :value="__('Mot de passe')" />
 
             <x-text-input style="background-color: rgba(63, 38, 57, 1)" id="password" class="block mt-1 w-full"
                 type="password" name="password" required autocomplete="new-password" />
@@ -52,7 +52,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4 mb-8">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="password_confirmation" :value="__('Confirmer Mot de passe')" />
 
             <x-text-input style="background-color: rgba(63, 38, 57, 1)" id="password_confirmation"
                 class="block mt-1 w-full" type="password" name="password_confirmation" required

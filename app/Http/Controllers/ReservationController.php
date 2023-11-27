@@ -89,6 +89,13 @@ class ReservationController extends Controller
             }
         }
 
+        if (count($request->input('prestations')) > 2) {
+            if (count($request->input('hours')) < 3) {
+                Alert::toast("La durée minimum pour plusieurs prestations est de 2h", 'error');
+                return redirect()->back()->withInput($request->input());
+            }
+        }
+
         $reservation = new Reservation();
         $reservation->user_id = Auth::user()->id;
         $reservation->date = date("Y-m-d", strtotime(str_replace('/', '-', $request->input('date'))));
@@ -128,25 +135,8 @@ class ReservationController extends Controller
 
     public function paid(Request $request, $id)
     {
-        if ($request->method() == 'POST') {
-            $reservation = Reservation::find($id);
-            $reservation->paid = true;
-
-            if ($reservation->save()) {
-
-                $admins = User::where('admin', true)->get();
-                foreach ($admins as $admin) {
-                    $admin->notify(new NouvelleReservation());
-                }
-                Alert::toast("Réservation payé", 'success');
-                return redirect()->route('reservation.index');
-            } else {
-                Alert::toast('Une erreur est survenue', 'error');
-                return redirect()->back()->withInput($request->input());
-            }
-        } else {
-            return view('reservation.paid', compact('id'));
-        }
+        $reservation = Reservation::find($id);
+        return view('reservation.paid', compact('reservation'));
     }
 
     /**

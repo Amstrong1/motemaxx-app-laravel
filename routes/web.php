@@ -1,11 +1,14 @@
 <?php
 
+use App\Models\User;
 use App\Models\Motivation;
 use App\Models\Advertisement;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\MotivationController;
@@ -32,21 +35,25 @@ use App\Http\Controllers\UserConsultationController;
 //     return view('welcome');
 // });
 
-Route::get('/migrate', function(){
+Route::get('/migrate', function () {
     Artisan::call('migrate');
     dd('migrated!');
 });
 
-Route::get('reboot',function(){
+Route::get('reboot', function () {
     Artisan::call('view:clear');
     Artisan::call('route:clear');
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
-      dd('All done!');
-  });
+    dd('All done!');
+});
 
-  Route::get('/', WelcomeController::class)->name('welcome');
-  Route::post('/mail', [WelcomeController::class, 'mail'])->name('mail');
+Route::get('/', WelcomeController::class)->name('welcome');
+Route::post('/mail', [WelcomeController::class, 'mail'])->name('mail');
+
+Route::get('/coming_soon', function () {
+    return view('coming-soon');
+})->name('coming_soon');
 
 Route::get('/appiphone', function () {
     $motivation = Motivation::where('publication_date', '<=', date('Y-m-d'))->orderBy('id', 'desc')->first();
@@ -62,7 +69,28 @@ Route::resource('recommendation', RecommendationController::class);
 
 
 Route::middleware('auth')->group(function () {
-    
+
+    Route::get('error', [PaymentController::class, 'error']);
+    Route::get('success', [PaymentController::class, 'success']);
+    Route::post('pay', [PaymentController::class, 'pay'])->name('payment');
+
+    Route::post('/markAsRead', function () {
+        if (Auth::user()->admin == 'true') {
+            $admins = User::where('admin', true)->get();
+            foreach ($admins as $admin) {
+                foreach ($admin->unreadNotifications as $notification) {
+                    $notification->markAsRead();
+                }
+            }
+        } else {
+            foreach (Auth::user()->unreadNotifications as $notification) {
+                $notification->markAsRead();
+            }
+        }
+
+        return back();
+    })->name('markAsRead');
+
     Route::match(['get', 'post'], 'reservation/paid/{id}', [ReservationController::class, 'paid'])->name('reservation.paid');
     Route::resource('user', UserController::class);
     Route::resource('reservation', ReservationController::class);
