@@ -88,10 +88,12 @@ class ReservationController extends Controller
             }
         }
 
-        if (count($request->input('prestations')) > 2) {
-            if (count($request->input('hours')) < 3) {
-                Alert::toast("La durée minimum pour plusieurs prestations est de 2h", 'error');
-                return redirect()->back()->withInput($request->input());
+        if ($request->input('prestations') !== null) {
+            if (count($request->input('prestations')) > 2) {
+                if (count($request->input('hours')) < 3) {
+                    Alert::toast("La durée minimum pour plusieurs prestations est de 2h", 'error');
+                    return redirect()->back()->withInput($request->input());
+                }
             }
         }
 

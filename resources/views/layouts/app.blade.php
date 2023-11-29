@@ -48,9 +48,9 @@
         @include('layouts.navigation')
 
         <!-- Page Content -->
-        <main class="pb-20"> {{ $slot }} </main>
+        <main class="pb-20 overflow-scroll"> {{ $slot }} </main>
 
-        <footer class="w-full h-max">
+        <footer class="w-full h-max mt-10">
             @include('layouts.bottom-bar')
         </footer>
     </div>

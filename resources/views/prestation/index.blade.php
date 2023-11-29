@@ -19,7 +19,7 @@
                             <div class="h-16 overflow-hidden block mx-auto">
                                 <img class="h-16 rounded-full block mx-auto" src="{{ asset('storage/' . $prestation->logo) }}" alt="{{ $prestation->name }}">
                             </div>
-                            <p class="my-2 uppercase">
+                            <p class="my-2 uppercase text-xs">
                                 {{ $prestation->name }}
                             </p>
                         </div>
