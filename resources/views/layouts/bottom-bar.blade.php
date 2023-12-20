@@ -44,7 +44,7 @@
             <span class="tab tab-kategori block uppercase">Reservations</span>
         </a>
 
-        <a href="{{ route('coming_soon') }}"
+        <a href="{{ route('chat') }}"
             class="w-full text-white justify-center inline-block text-center pt-2 pb-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                 class="w-6 h-6 block mx-auto">

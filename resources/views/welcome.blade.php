@@ -120,7 +120,8 @@
                             data-te-sidenav-right="true">
                             <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
                                 <li class="relative">
-                                    <a href="/" class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                    <a href="/"
+                                        class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                         data-te-sidenav-link-ref>
                                         <span
                                             class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
@@ -207,12 +208,16 @@
 
                 <div class="space-y-5 lg:space-x-5 mb-10">
                     {{-- <a href="#services" style="background-color: #c98c3f"
-                        class="block md:inline px-8 py-3 font-medium bg-indigo-800 text-white text-lg rounded-md hover:bg-indigo-600 transiton ease-in-out duration-300">Voir
+                        class="block md:inline px-8 py-3 font-medium bg-indigo-800 text-white text-lg rounded-md hover:bg-indigo-600 transiton ease-in-out duration-300">
+                        
+
                         Plus</a> --}}
                     <p class="font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Télécharger
                         l'application </p>
                     <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
-                        <img src="{{ asset('img/app_store.svg') }}" class="h-8 md:h-12 pr-4 bounce-top-icons">
+                        <a href="{{ route('appiphone') }}">
+                            <img src="{{ asset('img/app_store.svg') }}" class="h-8 md:h-12 pr-4 bounce-top-icons">
+                        </a>
                         <img src="{{ asset('img/play_store.svg') }}" class="h-8 md:h-12 bounce-top-icons">
                     </div>
                 </div>
@@ -248,7 +253,7 @@
                                     <button type="button" style="background-color: #fddb7e; color: #402639"
                                         class="inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0  active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                                         data-te-ripple-init data-te-ripple-color="light">
-                                        Voir plus
+                                        Nous contacter
                                     </button>
                                 </a>
                             </div>
@@ -358,8 +363,8 @@
 
                         <div class="block rounded-lg bg-white p-6 shadow-xl dark:bg-neutral-700">
                             <h2 class="text-center font-bold mb-2">Contact</h2>
-                            <form action="{{ route('mail') }}" id="form" method="POST" x-data="validateContactForm()"
-                                x-init="$watch('name', value => { validate('name') })
+                            <form action="{{ route('mail') }}" id="form" method="POST"
+                                x-data="validateContactForm()" x-init="$watch('name', value => { validate('name') })
                                 $watch('email', value => { validate('email') })
                                 $watch('message', value => { validate('message') })">
                                 @csrf

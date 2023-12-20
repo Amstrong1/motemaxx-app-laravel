@@ -16,6 +16,7 @@ use App\Http\Controllers\PrestationController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\ResConsultationController;
 use App\Http\Controllers\UserConsultationController;
@@ -51,9 +52,10 @@ Route::get('reboot', function () {
 Route::get('/', WelcomeController::class)->name('welcome');
 Route::post('/mail', [WelcomeController::class, 'mail'])->name('mail');
 
-Route::get('/coming_soon', function () {
-    return view('coming-soon');
-})->name('coming_soon');
+Route::match(['get', 'post'], '/chat', [ChatController::class, 'index'])->name('chat');
+// Route::get('/coming_soon', function () {
+//     return view('coming-soon');
+// })->name('coming_soon');
 
 Route::get('/appiphone', function () {
     $motivation = Motivation::where('publication_date', '<=', date('Y-m-d'))->orderBy('id', 'desc')->first();

@@ -2,11 +2,11 @@
     <div class="max-w-7xl mx-auto pb-10 sm:px-6 lg:px-8">
         <div class="overflow-hidden sm:rounded-lg">
             <div class="mx-6 border-b-2" style="border-color: #4f364b">
-                <div class="py-4 text-black text-center font-bold">
+                <div class="py-4 text-black text-center font-bold text-md">
                     {{ __('Motemaxx vous souhaite la bienvenue') }}
                 </div>
 
-                <div class="py-4 text-gray-900 uppercase text-center text-xs">
+                <div class="py-4 text-gray-900 uppercase text-center text-sm">
                     {{ __('Répondez à ce petit questionnaire') }}
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 @endphp
                 @foreach ($consultations as $consultation)
                     <input type="hidden" name="consultation_id[]" value="{{ $consultation->id }}">
-                    <div class="relative my-4 p-4">
+                    <div class="relative my-4 p-4 text-lg">
                         <label class="my-1" for="">{!! $consultation->name !!}</label>
                         @if ($consultation->resConsultations()->get() !== null && $consultation->resConsultations()->count() !== 0)
                             <div>
