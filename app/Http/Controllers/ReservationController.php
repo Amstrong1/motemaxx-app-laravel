@@ -126,7 +126,7 @@ class ReservationController extends Controller
         }
 
         if ($reservation->save()) {
-            Alert::toast("Réservation éffectué", 'success');
+            // Alert::toast("Réservation éffectué", 'success');
             return redirect()->route('reservation.paid', $reservation->id);
         } else {
             Alert::toast('Une erreur est survenue', 'error');

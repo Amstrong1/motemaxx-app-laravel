@@ -79,7 +79,11 @@ class UserConsultationController extends Controller
      */
     public function show(UserConsultation $userConsultation)
     {
-        //
+        // dd($userConsultation);
+        return view('admin.user-consultation.show', [
+            'userConsultation' => $userConsultation,
+            'my_fields' => $this->userConsultations_fields(),
+        ]);
     }
 
     /**
@@ -124,5 +128,24 @@ class UserConsultationController extends Controller
             'show' => 'Voir',
         );
         return $actions;
+    }
+
+    private function userConsultations_fields()
+    {
+        $fields = [
+            'consultation_name' => [
+                'title' => 'Consultation',
+                'field' => 'text'
+            ],
+            'answer' => [
+                'title' => 'Réponse',
+                'field' => 'text'
+            ],
+            'description' => [
+                'title' => 'Description',
+                'field' => 'textarea'
+            ],
+        ];
+        return $fields;
     }
 }

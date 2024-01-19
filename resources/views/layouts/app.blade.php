@@ -17,9 +17,16 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet"> --}}
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+
+    <style>
+        @font-face {
+            font-family: "Arial";
+            src: url("{{ asset('assets/fonts/arial.ttf') }}");
+        }
+    </style>
 
     <script src="https://cdn.tailwindcss.com/3.3.0"></script>
     <script>
@@ -27,8 +34,8 @@
             darkMode: "class",
             theme: {
                 fontFamily: {
-                    sans: ["Philosopher", "serif"],
-                    body: ["Philosopher", "serif"],
+                    sans: ["Arial", "serif"],
+                    body: ["Arial", "serif"],
                     mono: ["ui-monospace", "monospace"],
                 },
             },

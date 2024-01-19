@@ -23,7 +23,7 @@ class UserConsultation extends Model
 
     public function getUserNameAttribute()
     {
-        return $this->user->name;
+        return $this->user->name ?? 'Compte Supprimé';
     }
 
     public function getConsultationNameAttribute()

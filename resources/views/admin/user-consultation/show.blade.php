@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h1>Voir les détails</h1>
-                    <x-forms.show :item="$consultation" :fields="$my_fields" type="consultation" />                    
+                    <x-forms.show :item="$userConsultation" :fields="$my_fields" type="user_consultation" />                    
                 </div>
             </div>
         </div>
